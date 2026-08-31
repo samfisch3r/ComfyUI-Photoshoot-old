@@ -103,7 +103,7 @@ function baueVorschau(daten, state) {
 
   // Body from top to bottom - the counterweight to being head-heavy.
   for (const cat of ["height", "figure", "shoulders", "bust", "waist",
-                     "belly", "hips", "legs"]) {
+    "belly", "hips", "legs"]) {
     if (w(cat)) teile.push(w(cat));
   }
 
@@ -247,7 +247,7 @@ function wuerflePersona(daten, stateAktuell) {
     {
       ethnicity: "Ostasiatisch",
       skinTone: ["Sehr hell", "Hell", "Kühles Porzellan", "Warmes Gold"],
-      complexion: ["Frisch & taufrisch", "Gleichmäßig", "Natürliche Poren"],
+      complexion: ["Frisch & taufrisch", "Gleichmässig", "Natürliche Poren"],
       hairColor: ["Tiefschwarz", "Schwarz", "Schwarzbraun"],
       eyes: ["Dunkelbraun", "Schwarzbraun"],
       hairF: ["Lange glatte Haare", "Kurzer Bob", "Curtain Bangs", "Pixie Cut"],
@@ -302,7 +302,7 @@ function wuerflePersona(daten, stateAktuell) {
   f.hair = valid("hair", _zufall(hairPool));
 
   // 4. Figure & Body
-  f.height = valid("height", _zufall(["Mittelgroß", "Groß", "Zierlich"]));
+  f.height = valid("height", _zufall(["Mittelgross", "Gross", "Zierlich"]));
   const figures = isMann
     ? ["Athletisch", "Sportlich", "Definiert", "Schlank", "Muskulös"]
     : ["Athletisch", "Schlank", "Sanduhr", "Sportlich", "Kurvig", "Definiert"];
@@ -312,7 +312,7 @@ function wuerflePersona(daten, stateAktuell) {
   // 5. Facial structure
   f.cheekbones = valid("cheekbones", _zufall(["Hoch betont", "Markant", "Sanft", "Definiert"]));
   f.nose = valid("nose", _zufall(["Gerade", "Fein", "Klassisch", "Leichter Schwung"]));
-  f.eyeShape = valid("eyeShape", _zufall(["Mandelförmig", "Offener Blick", "Groß & rund", "Katzenaugen"]));
+  f.eyeShape = valid("eyeShape", _zufall(["Mandelförmig", "Offener Blick", "Gross & rund", "Katzenaugen"]));
 
   // 6. Makeup (if female / trans female)
   if (!isMann && Math.random() > 0.35) {
@@ -335,7 +335,7 @@ function wuerflePersona(daten, stateAktuell) {
     ? ["Sneaker", "Combat Boots", "Loafer"]
     : ["Combat Boots", "Sneaker", "Loafer", "Stiefeletten mit Absatz", "Ballerinas", "Riemchen-Sandaletten", "Stiletto High Heels"];
   f.shoes = valid("shoes", _zufall(shoesList));
-  f.shoesColor = valid("shoesColor", _zufall(["Schwarz", "Weiß", "Cognac / Braun", "Nude"]));
+  f.shoesColor = valid("shoesColor", _zufall(["Schwarz", "Weiss", "Cognac / Braun", "Nude"]));
 
   // 9. Editorial Fashion Details
   const outfits = [
@@ -623,7 +623,7 @@ function baue(node, daten) {
       const kopfteil = `${gesetzt} ${uet("Gesichtsfelder", "ui")} — `;
       warn.textContent = arg
         ? "\u26a0 " + kopfteil +
-          uet("bei Ganzkörper und Totale kippt die Komposition, der Kopf wird zu groß", "ui")
+        uet("bei Ganzkörper und Totale kippt die Komposition, der Kopf wird zu gross", "ui")
         : kopfteil + uet("für weite Einstellungen reichen vier bis fünf", "ui");
       warn.title =
         uet("Bildmodelle verteilen die Bildfläche ungefähr nach der Gewichtung im ", "ui") +
@@ -668,7 +668,7 @@ function baue(node, daten) {
         rechts.append(knopf(`⟲ ${uet(aktiv, "sektionen")} (${dieses})`,
           uetf("Die {0} gesetzten Felder dieser Karte zurücksetzen", "ui", dieses), () => {
             const felder = { ...state.felder }, texte = { ...state.texte },
-                  mehrfach = { ...state.mehrfach };
+              mehrfach = { ...state.mehrfach };
             for (const cat of flach(sektion.felder)) {
               const art = daten.art?.[cat] || "select";
               if (art === "text") texte[cat] = "";
@@ -681,14 +681,16 @@ function baue(node, daten) {
       if (gesamt) {
         rechts.append(nachfrage
           ? knopf(uetf("wirklich alle {0} löschen?", "ui", gesamt),
-                  uet("Nochmal klicken bestätigt", "ui"), () => {
+            uet("Nochmal klicken bestätigt", "ui"), () => {
               nachfrage = false;
-              schreib({ ...VORGABE, felder: {}, mehrfach: { skinFeatures: [] },
-                        texte: { ageExact: "", details: "" },
-                        sektion: aktiv, gruppe: { shoes: daten.alle } });
+              schreib({
+                ...VORGABE, felder: {}, mehrfach: { skinFeatures: [] },
+                texte: { ageExact: "", details: "" },
+                sektion: aktiv, gruppe: { shoes: daten.alle }
+              });
             })
           : knopf(`⟲ ${uet("alles", "ui")} (${gesamt})`,
-                  uet("Alle Felder des Nodes zurücksetzen", "ui"), () => {
+            uet("Alle Felder des Nodes zurücksetzen", "ui"), () => {
               nachfrage = true;
               zeichne();
             }));
@@ -712,7 +714,7 @@ function baue(node, daten) {
   const CHROM = 48;
   const w = node.addDOMWidget("k2_person", "custom", root, {
     getValue: () => node.properties?.[PROP],
-    setValue: () => {},
+    setValue: () => { },
     getMinHeight: () => 240,
     getMaxHeight: () => Math.max(240, (node.size?.[1] || 400) - CHROM),
     margin: 4,

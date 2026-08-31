@@ -188,7 +188,7 @@ The Person Builder contains 12 fields for the face and 8 for the body. Because d
   `"realistic head-to-body proportions with a proportionally small head, ample negative space"`.
 
 ### 2. Macro Floor-Level Detail Shots:
-When shooting footwear (`Füße`) or hands (`Hände`) in **Detail** mode:
+When shooting footwear (`Füsse`) or hands (`Hände`) in **Detail** mode:
 * The camera is forced to macro perspective:  
   `"extreme close-up macro shot of feet and shoes, low angle floor-level perspective, camera focused tightly on the footwear and ankles"`.
 * The person description is automatically pruned to only describe footwear/hosiery (`DETAIL_FUESSE`), preventing head and torso tokens from leaking into floor-level shots.

@@ -87,7 +87,7 @@ PRESETS = {
     "height": [
         ("Klein", "short"), ("Zierlich", "petite, short stature"),
         ("Durchschnittlich", "average height"),
-        ("Groß", "tall"), ("Model-Größe", "very tall, model height"),
+        ("Gross", "tall"), ("Model-Grösse", "very tall, model height"),
     ],
     "figure": [
         ("Sehr schlank", "very slim, slender build"), ("Schlank", "slim build"),
@@ -101,8 +101,8 @@ PRESETS = {
     ],
     "bust": [
         ("Klein", "small bust"), ("Mittel", "medium bust"),
-        ("Voll", "full bust"), ("Groß", "large bust"),
-        ("Sehr groß", "very large full bust"),
+        ("Voll", "full bust"), ("Gross", "large bust"),
+        ("Sehr gross", "very large full bust"),
     ],
     # ── Body ─────────────────────────────────────────────────────────────────
     # A counterweight to being head-heavy. Before these fields existed the
@@ -157,7 +157,7 @@ PRESETS = {
         ("Blond", "blonde"), ("Platinblond", "platinum blonde"), ("Dunkelblond", "dark blonde"),("Dreckig Blond", "dirty blonde"),
         ("Hellbraun", "light brown"), ("Braun", "brown"), ("Dunkelbraun", "dark brown"), ("Schwarz", "black"),
         ("Rot / Kupfer", "copper red"), ("Kastanie", "auburn"), ("Erdbeerblond", "strawberry blonde"),
-        ("Grau / Silber", "silver gray"), ("Eisweiß", "icy platinum white"),
+        ("Grau / Silber", "silver gray"), ("Eisweiss", "icy platinum white"),
         ("Pastellrosa", "pastel pink"), ("Mitternachtsblau", "deep midnight blue"),
         ("Smaragdgrün", "rich emerald green"),
     ],
@@ -279,7 +279,7 @@ PRESETS = {
         ("Cat-Eye", "a sharp winged cat-eye liner"),
         ("Breit gezogen", "a bold thick eyeliner"),
         ("Grafisch", "a graphic geometric eyeliner"),
-        ("Weiß akzentuiert", "eyeliner with a white inner-corner accent"),
+        ("Weiss akzentuiert", "eyeliner with a white inner-corner accent"),
     ],
     "eyeshadow": [
         ("Nude", "nude eyeshadow"), ("Braun", "warm brown eyeshadow"),
@@ -323,7 +323,7 @@ PRESETS = {
     ],
     "nailColor": [  # substituted into nailLength (replacing "nails"), otherwise "<value> nails"
         ("Rot", "red"), ("French", "french-tip"), ("Nude", "nude"),
-        ("Schwarz", "black"), ("Pink", "pink"), ("Weiß", "white"),
+        ("Schwarz", "black"), ("Pink", "pink"), ("Weiss", "white"),
     ],
     # Legwear. Used to be typed by hand into the free text of every prompt.
     # The make only - the colour lives in "hosieryColor" and is placed in front
@@ -354,7 +354,7 @@ PRESETS = {
     ],
     "hosieryColor": [  # placed before the legwear
         ("Hautfarben", "nude"), ("Beige", "beige"), ("Braun", "tan"),
-        ("Karamell", "caramel"), ("Creme", "cream"), ("Weiß", "white"),
+        ("Karamell", "caramel"), ("Creme", "cream"), ("Weiss", "white"),
         ("Grau", "grey"), ("Anthrazit", "charcoal"), ("Schwarz", "black"),
         ("Rot", "red"), ("Bordeaux", "burgundy"), ("Pink", "hot pink"),
         ("Rosé", "dusty rose"), ("Violett", "purple"), ("Blau", "navy blue"),
@@ -381,7 +381,7 @@ PRESETS = {
         ("Ringe", "several rings"),
         ("Armreif", "a bangle"),
         ("Armband", "a thin bracelet"),
-        ("Fußkettchen", "an ankle chain"),
+        ("Fusskettchen", "an ankle chain"),
         ("Bauchnabelpiercing", "a navel piercing"),
     ],
     "eyewear": [
@@ -486,7 +486,7 @@ PRESETS = {
         # none
         ("Nur Strümpfe", "only sheer stockings, no shoes"),
         ("Nur Socken", "only socks, no shoes"),
-        ("Barfuß", "barefoot"),
+        ("Barfuss", "barefoot"),
     ],
     # Placed in front of the shoes. A field of its own, because image models
     # attach colours to the nearest garment when nothing else is in the way:
@@ -494,7 +494,7 @@ PRESETS = {
     # out black as well. An explicit second colour gives the model a competing
     # binding.
     "shoesColor": [
-        ("Schwarz", "black"), ("Weiß", "white"), ("Hautfarben", "nude"),
+        ("Schwarz", "black"), ("Weiss", "white"), ("Hautfarben", "nude"),
         ("Beige", "beige"), ("Braun", "brown"), ("Cognac", "cognac brown"),
         ("Grau", "grey"), ("Rot", "red"), ("Bordeaux", "burgundy"),
         ("Pink", "hot pink"), ("Rosé", "dusty rose"), ("Violett", "purple"),
@@ -887,7 +887,7 @@ SCHUH_GRUPPEN = {
                "Bondage-Fessel-Sandaletten", "Lack-Domina-Pumps"],
     "flach": ["Ballerinas", "Flache Riemchensandalen", "Gladiator-Sandalen",
               "Espadrilles", "Loafer", "Sneaker", "Chunky Sneaker", "Flip-Flops"],
-    "ohne": ["Nur Strümpfe", "Nur Socken", "Barfuß"],
+    "ohne": ["Nur Strümpfe", "Nur Socken", "Barfuss"],
 }
 
 # Tabs of the interface. Without this split, 44 fields would stack up and the
@@ -958,7 +958,7 @@ GESICHT_WARNUNG_AB = 9   # ab hier deutlich
 FELDNAMEN = {
     "gender": "Geschlecht", "age": "Alter", "ageExact": "genaues Alter",
     "ethnicity": "Herkunft", "skinTone": "Hautton",
-    "height": "Größe", "figure": "Figur", "bust": "Büste",
+    "height": "Grösse", "figure": "Figur", "bust": "Büste",
     "hair": "Frisur", "hairColor": "Haarfarbe", "eyes": "Augen",
     "lashes": "Wimpern", "complexion": "Teint",
     "shoulders": "Schultern", "waist": "Taille", "belly": "Bauch",

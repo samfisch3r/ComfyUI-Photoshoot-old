@@ -132,7 +132,7 @@ PERSON_STATE = {
     "felder": {
         "gender": "Frau", "age": "Ende 20", "ethnicity": "Skandinavisch",
         "skinTone": "Sehr hell", "complexion": "Natürliche Poren",
-        "height": "Groß", "figure": "Athletisch", "shoulders": "Sportlich",
+        "height": "Gross", "figure": "Athletisch", "shoulders": "Sportlich",
         "hair": "Lange Wellen", "hairColor": "Rot / Kupfer",
         "eyeShape": "Mandelförmig", "eyes": "Graugrün",
         "cheekbones": "Hoch betont", "nose": "Gerade",

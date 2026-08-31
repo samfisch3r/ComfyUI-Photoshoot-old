@@ -83,10 +83,12 @@ PRESETS = {
         ("Über dem Kopf gestreckt", "both arms stretched above the head"),
         ("Vor der Brust verschränkt", "arms crossed in front of the chest"),
         ("Seitlich hängend", "arms hanging relaxed at the sides"),
+        ("Natürliche Bewegung beim Gehen", "natural arm movement while walking"),
         ("Hände auf den Hüften", "hands on the hips"),
         ("Hände in den Hosentaschen", "hands in the pockets"),
-        ("Hände im Schoß", "hands resting in the lap"),
+        ("Hände im Schoss", "hands resting in the lap"),
         ("Hände auf den Knien", "hands resting on the knees"),
+        ("Eine Hand hält eine Kaffeetasse", "one hand holding a coffee cup"),
         ("Hinter sich abgestützt", "hands propped on the surface behind"),
         ("Auf die Unterarme gestützt", "leaning on the forearms"),
         ("Eine Hand am Gesicht", "one hand touching the face"),
@@ -102,7 +104,7 @@ PRESETS = {
         ("Angewinkelt", "knees drawn up"),
         ("Ein Knie angewinkelt", "one knee bent"),
         ("Ausgestreckt", "legs stretched out"),
-        ("Knie zusammen, Füße auseinander", "knees together, feet apart"),
+        ("Knie zusammen, Füsse auseinander", "knees together, feet apart"),
         ("Untergeschlagen", "legs tucked underneath"),
     ],
     # Body tension has to fit every base posture, because both fields are
@@ -202,20 +204,22 @@ _AR_STEHEND = ["Hinter dem Rücken", "Hinter dem Rücken, Handgelenke gekreuzt",
                "Vor der Brust verschränkt", "Seitlich hängend",
                "Hände auf den Hüften", "Hände in den Hosentaschen",
                "Eine Hand am Gesicht", "Eine Hand im Haar"]
+_AR_GEHEND = _AR_STEHEND + ["Natürliche Bewegung beim Gehen"]
 _AR_VORGEBEUGT = ["Hinter dem Rücken", "Vor der Brust verschränkt", "Seitlich hängend",
                   "Hände auf den Hüften", "Hände auf den Knien",
                   "Eine Hand am Gesicht", "Eine Hand im Haar"]
-_AR_SITZ = _AR_STEHEND + ["Hände im Schoß", "Hände auf den Knien"]
+_AR_SITZ = _AR_STEHEND + ["Hände im Schoss", "Hände auf den Knien",
+                          "Eine Hand hält eine Kaffeetasse"]
 _AR_SITZ_BODEN = _AR_SITZ + ["Hinter sich abgestützt", "Arme umschlingen die Knie"]
 _AR_ZURUECK = ["Hinter dem Kopf", "Über dem Kopf gestreckt", "Vor der Brust verschränkt",
-               "Seitlich hängend", "Hände im Schoß", "Hinter sich abgestützt",
+               "Seitlich hängend", "Hände im Schoss", "Hinter sich abgestützt",
                "Eine Hand am Gesicht", "Eine Hand im Haar"]
 _AR_HOCKE = ["Hinter dem Rücken", "Vor der Brust verschränkt", "Hände auf den Hüften",
              "Hände auf den Knien", "Arme umschlingen die Knie",
              "Eine Hand am Gesicht", "Eine Hand im Haar"]
 _AR_VIER = ["Auf die Unterarme gestützt"]
 _AR_RUECKEN = ["Hinter dem Kopf", "Über dem Kopf gestreckt", "Vor der Brust verschränkt",
-               "Seitlich hängend", "Hände im Schoß", "Eine Hand am Gesicht",
+               "Seitlich hängend", "Hände im Schoss", "Eine Hand am Gesicht",
                "Eine Hand im Haar"]
 _AR_BAUCH = ["Über dem Kopf gestreckt", "Seitlich hängend", "Auf die Unterarme gestützt",
              "Eine Hand am Gesicht", "Eine Hand im Haar"]
@@ -239,7 +243,7 @@ HALTUNG_ARME = {
     "Stehend":                        list(_AR_STEHEND),
     "Stehend, Gewicht auf einem Bein": list(_AR_STEHEND),
     "Angelehnt":                      list(_AR_STEHEND),
-    "Gehend":                         list(_AR_STEHEND),
+    "Gehend":                         list(_AR_GEHEND),
     "Vorgebeugt":                     list(_AR_VORGEBEUGT),
     "Sitzend":                        list(_AR_SITZ_BODEN),
     "Auf einem Stuhl sitzend":        list(_AR_SITZ),
@@ -264,21 +268,21 @@ _BE_VORGEBEUGT = ["Geschlossen", "Leicht geöffnet", "Weit gespreizt",
                   "Ein Knie angewinkelt"]
 _BE_SITZ = ["Geschlossen", "Leicht geöffnet", "Übereinandergeschlagen",
             "Knöchel gekreuzt", "Ein Knie angewinkelt", "Ausgestreckt",
-            "Knie zusammen, Füße auseinander"]
+            "Knie zusammen, Füsse auseinander"]
 _BE_SITZ_BODEN = ["Geschlossen", "Leicht geöffnet", "Weit gespreizt",
                   "Übereinandergeschlagen", "Angewinkelt", "Ein Knie angewinkelt",
-                  "Ausgestreckt", "Untergeschlagen", "Knie zusammen, Füße auseinander"]
+                  "Ausgestreckt", "Untergeschlagen", "Knie zusammen, Füsse auseinander"]
 _BE_ZURUECK = ["Geschlossen", "Leicht geöffnet", "Übereinandergeschlagen",
                "Knöchel gekreuzt", "Angewinkelt", "Ein Knie angewinkelt", "Ausgestreckt"]
 _BE_KNIE = ["Geschlossen", "Leicht geöffnet", "Ein Knie angewinkelt",
-            "Knie zusammen, Füße auseinander", "Untergeschlagen"]
+             "Knie zusammen, Füsse auseinander", "Untergeschlagen"]
 _BE_HOCKE = ["Geschlossen", "Leicht geöffnet", "Weit gespreizt", "Angewinkelt"]
-_BE_VIER = ["Geschlossen", "Leicht geöffnet", "Knie zusammen, Füße auseinander"]
+_BE_VIER = ["Geschlossen", "Leicht geöffnet", "Knie zusammen, Füsse auseinander"]
 _BE_LIEGEND = ["Geschlossen", "Leicht geöffnet", "Weit gespreizt",
                "Übereinandergeschlagen", "Knöchel gekreuzt", "Angewinkelt",
                "Ein Knie angewinkelt", "Ausgestreckt"]
 _BE_BAUCH = ["Geschlossen", "Leicht geöffnet", "Ein Knie angewinkelt", "Ausgestreckt",
-             "Knie zusammen, Füße auseinander"]
+             "Knie zusammen, Füsse auseinander"]
 
 HALTUNG_BEINE = {
     "Stehend":                        list(_BE_STEHEND),

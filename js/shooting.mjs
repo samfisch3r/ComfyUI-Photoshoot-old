@@ -502,7 +502,7 @@ function baue(node, d) {
           : fokusWirksam.length
             ? zaehlstand(d.fokus, state.fokusse)
             : uet("keiner passt", "ui"),
-        hinweis: uet("Bildschwerpunkt variieren (Gesicht, Beine, Füße …). Welche ", "ui") +
+        hinweis: uet("Bildschwerpunkt variieren (Gesicht, Beine, Füsse …). Welche ", "ui") +
           uet("möglich sind, hängt von den gewählten Kameraeinstellungen ab.", "ui"),
         inhalt: state.aktiv?.fokus
           ? () => chipreihe(d.fokus, state.fokusse,
@@ -516,7 +516,7 @@ function baue(node, d) {
         stand: state.aktiv?.format
           ? uet("gewürfelt", "ui")
           : massAnliegend
-            ? (extern ? `${extern[0]}×${extern[1]}` : uet("von außen", "ui"))
+            ? (extern ? `${extern[0]}×${extern[1]}` : uet("von aussen", "ui"))
             : state.festesFormat || "2:3",
         hinweis: uet("An: Seitenverhältnis passend zur Kameraeinstellung würfeln. ", "ui") +
           uet("Aus: ein festes Verhältnis für alle Fotos.", "ui"),
@@ -594,8 +594,8 @@ function baue(node, d) {
     // gives a different tensor. Without this notice the series seed looks
     // broken.
     if (!state.aktiv?.rausch && state.aktiv?.format) {
-      warne("⚠ " + uet("Format würfelt — bei wechselnder Größe wirkt der Serien-Seed nicht", "ui"),
-        uet("Das Rauschen hat Bildmaße. Ändert sich das Seitenverhältnis, ist es ", "ui") +
+      warne("⚠ " + uet("Format würfelt — bei wechselnder Grösse wirkt der Serien-Seed nicht", "ui"),
+        uet("Das Rauschen hat Bildmasse. Ändert sich das Seitenverhältnis, ist es ", "ui") +
         uet("ein anderes Rauschfeld, auch bei gleichem Seed.", "ui"));
     }
 
@@ -608,16 +608,16 @@ function baue(node, d) {
       zeile.className = "k2-feld";
       const n = document.createElement("div");
       n.className = "k2-name";
-      n.textContent = uet("Größe", "ui");
+      n.textContent = uet("Grösse", "ui");
       const w = document.createElement("div");
       w.className = "k2-achse-wert";
       w.style.maxWidth = "none";
       w.textContent = extern
-        ? `${extern[0]}×${extern[1]}  ·  ` + uet("von außen", "ui")
-        : uet("von außen — Wert erst beim Ausführen bekannt", "ui");
+        ? `${extern[0]}×${extern[1]}  ·  ` + uet("von aussen", "ui")
+        : uet("von aussen — Wert erst beim Ausführen bekannt", "ui");
       zeile.title =
         uet("width_in und height_in liegen an und haben Vorrang. Die eigene ", "ui") +
-        uet("Größenstufe wirkt erst wieder, wenn dort nichts angeschlossen ist ", "ui") +
+        uet("Grössenstufe wirkt erst wieder, wenn dort nichts angeschlossen ist ", "ui") +
         uet("oder das Format gewürfelt wird.", "ui");
       zeile.append(n, w);
       root.append(zeile);
@@ -632,7 +632,7 @@ function baue(node, d) {
         })),
         String(state.groesse || d.kanteStandard),
         (v) => schreib({ ...state, groesse: parseInt(v, 10) }),
-        uet("Größe", "ui"),
+        uet("Grösse", "ui"),
       );
       zeile.title =
         uet("Kantenlänge im Quadrat. Das Seitenverhältnis kommt von der ", "ui") +

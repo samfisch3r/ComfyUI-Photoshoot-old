@@ -53,8 +53,8 @@ PERSON = {
     },
     "height": {
         "Klein": "Short", "Zierlich": "Petite",
-        "Durchschnittlich": "Average", "Groß": "Tall",
-        "Model-Größe": "Model height",
+        "Durchschnittlich": "Average", "Gross": "Tall",
+        "Model-Grösse": "Model height",
     },
     "figure": {
         "Sehr schlank": "Very slim", "Schlank": "Slim", "Schlank definiert": "Lean toned",
@@ -64,8 +64,8 @@ PERSON = {
         "Muskulös": "Muscular",
     },
     "bust": {
-        "Klein": "Small", "Mittel": "Medium", "Voll": "Full", "Groß": "Large",
-        "Sehr groß": "Very large",
+        "Klein": "Small", "Mittel": "Medium", "Voll": "Full", "Gross": "Large",
+        "Sehr gross": "Very large",
     },
     "shoulders": {
         "Schmal": "Narrow", "Zierlich": "Delicate", "Gerade": "Squared",
@@ -105,7 +105,7 @@ PERSON = {
         "Braun": "Brown", "Dunkelbraun": "Dark brown", "Schwarz": "Black",
         "Rot / Kupfer": "Copper red", "Kastanie": "Auburn",
         "Erdbeerblond": "Strawberry blonde", "Grau / Silber": "Silver grey",
-        "Eisweiß": "Icy white", "Pastellrosa": "Pastel pink",
+        "Eisweiss": "Icy white", "Pastellrosa": "Pastel pink",
         "Mitternachtsblau": "Midnight blue", "Smaragdgrün": "Emerald green",
     },
     "faceShape": {
@@ -185,7 +185,7 @@ PERSON = {
         "Ohne": "None", "Dezent": "Subtle", "Kajal": "Kohl",
         "Kajal unten": "Kohl, lower lid", "Cat-Eye": "Cat-eye",
         "Breit gezogen": "Bold", "Grafisch": "Graphic",
-        "Weiß akzentuiert": "White accent",
+        "Weiss akzentuiert": "White accent",
     },
     "eyeshadow": {
         "Nude": "Nude", "Braun": "Warm brown", "Bronze": "Bronze",
@@ -217,7 +217,7 @@ PERSON = {
     },
     "nailColor": {
         "Rot": "Red", "French": "French", "Nude": "Nude", "Schwarz": "Black",
-        "Pink": "Pink", "Weiß": "White",
+        "Pink": "Pink", "Weiss": "White",
     },
     "hosiery": {
         "Nackte Beine": "Bare legs",
@@ -243,7 +243,7 @@ PERSON = {
     },
     "hosieryColor": {
         "Hautfarben": "Nude", "Beige": "Beige", "Braun": "Tan",
-        "Karamell": "Caramel", "Creme": "Cream", "Weiß": "White",
+        "Karamell": "Caramel", "Creme": "Cream", "Weiss": "White",
         "Grau": "Grey", "Anthrazit": "Charcoal", "Schwarz": "Black",
         "Rot": "Red", "Bordeaux": "Burgundy", "Pink": "Hot pink",
         "Rosé": "Dusty rose", "Violett": "Purple", "Blau": "Navy",
@@ -265,7 +265,7 @@ PERSON = {
         "Reitgerte in Hand": "Riding crop in hand",
         "Statement-Kette": "Statement necklace",
         "Ringe": "Rings", "Armreif": "Bangle", "Armband": "Bracelet",
-        "Fußkettchen": "Ankle chain", "Bauchnabelpiercing": "Navel piercing",
+        "Fusskettchen": "Ankle chain", "Bauchnabelpiercing": "Navel piercing",
     },
     "eyewear": {
         "Brille schmal": "Rectangular glasses", "Brille rund": "Round glasses",
@@ -338,10 +338,10 @@ PERSON = {
         "Loafer": "Loafers", "Sneaker": "Sneakers",
         "Chunky Sneaker": "Chunky sneakers", "Flip-Flops": "Flip-flops",
         "Nur Strümpfe": "Stockings only", "Nur Socken": "Socks only",
-        "Barfuß": "Barefoot",
+        "Barfuss": "Barefoot",
     },
     "shoesColor": {
-        "Schwarz": "Black", "Weiß": "White", "Hautfarben": "Nude",
+        "Schwarz": "Black", "Weiss": "White", "Hautfarben": "Nude",
         "Beige": "Beige", "Braun": "Brown", "Cognac": "Cognac",
         "Grau": "Grey", "Rot": "Red", "Bordeaux": "Burgundy",
         "Pink": "Hot pink", "Rosé": "Dusty rose", "Violett": "Purple",
@@ -482,8 +482,9 @@ POSE = {
         "Vor der Brust verschränkt": "Crossed in front",
         "Seitlich hängend": "Hanging at the sides",
         "Hände auf den Hüften": "Hands on hips",
-        "Hände im Schoß": "Hands in the lap",
+        "Hände im Schoss": "Hands in the lap",
         "Hände auf den Knien": "Hands on the knees",
+        "Eine Hand hält eine Kaffeetasse": "One hand holding a coffee cup",
         "Hinter sich abgestützt": "Propped up behind",
         "Auf die Unterarme gestützt": "Leaning on the forearms",
         "Eine Hand am Gesicht": "One hand at the face",
@@ -495,7 +496,7 @@ POSE = {
         "Weit gespreizt": "Spread wide", "Übereinandergeschlagen": "Crossed",
         "Knöchel gekreuzt": "Ankles crossed", "Angewinkelt": "Knees drawn up",
         "Ein Knie angewinkelt": "One knee bent", "Ausgestreckt": "Stretched out",
-        "Knie zusammen, Füße auseinander": "Knees together, feet apart",
+        "Knie zusammen, Füsse auseinander": "Knees together, feet apart",
         "Untergeschlagen": "Tucked underneath",
     },
     "spannung": {
@@ -519,7 +520,7 @@ SHOOTING = {
     "fokus": {
         "Gesicht": "Face", "Augen": "Eyes", "Lippen": "Lips",
         "Oberkörper": "Upper body", "Dekolleté": "Neckline", "Hände": "Hands",
-        "Taille": "Waist", "Beine": "Legs", "Füße": "Feet",
+        "Taille": "Waist", "Beine": "Legs", "Füsse": "Feet",
         "Rücken": "Back", "Ganze Figur": "Whole figure", "Raum": "Environment",
     },
 }
@@ -582,7 +583,7 @@ LIGHTING = {
 # ─────────────────────────────────────────────────────────────────────────────
 FELDNAMEN = {
     "Geschlecht": "Gender", "Typ": "Type", "Alter": "Age", "genaues Alter": "exact age",
-    "Herkunft": "Origin", "Hautton": "Skin tone", "Größe": "Height",
+    "Herkunft": "Origin", "Hautton": "Skin tone", "Grösse": "Height",
     "Figur": "Figure", "Büste": "Bust", "Frisur": "Hair", "Haarfarbe": "Colour",
     "Augen": "Eyes", "Wimpern": "Lashes", "Teint": "Complexion",
     "Schultern": "Shoulders", "Taille": "Waist", "Bauch": "Stomach",
@@ -703,7 +704,7 @@ UI = {
         "— no focus reaches the prompt at all",
     "Der Schwerpunkt ist an die Kameraeinstellung gekoppelt. Entweder ":
         "The focus is coupled to the framing. Either ",
-    "von außen — Wert erst beim Ausführen bekannt":
+    "von aussen — Wert erst beim Ausführen bekannt":
         "external — value only known at run time",
     "width_in und height_in liegen an und haben Vorrang. Die eigene ":
         "width_in and height_in are wired and take precedence. The node's own ",
@@ -720,7 +721,7 @@ UI = {
     "Gesichtsfelder": "face fields",
     "für weite Einstellungen reichen vier bis fünf":
         "four or five is enough for wide framings",
-    "bei Ganzkörper und Totale kippt die Komposition, der Kopf wird zu groß":
+    "bei Ganzkörper und Totale kippt die Komposition, der Kopf wird zu gross":
         "with full body and wide shots the composition tips over, the head grows too large",
     "Bildmodelle verteilen die Bildfläche ungefähr nach der Gewichtung im ":
         "Image models allocate frame area roughly by the weighting in the ",
@@ -736,7 +737,7 @@ UI = {
         "Vary the posture. Expanded: restrict to one family.",
     "Mimik variieren. Aufgeklappt: auf eine Stimmungsfamilie einschränken.":
         "Vary the expression. Expanded: restrict to one mood family.",
-    "Bildschwerpunkt variieren (Gesicht, Beine, Füße …). Welche ":
+    "Bildschwerpunkt variieren (Gesicht, Beine, Füsse …). Welche ":
         "Vary the focus (face, legs, feet …). Which are ",
     "möglich sind, hängt von den gewählten Kameraeinstellungen ab.":
         "possible depends on the chosen framings.",
@@ -757,18 +758,18 @@ UI = {
         "On: roll an aspect ratio matching the framing. ",
     "Aus: ein festes Verhältnis für alle Fotos.":
         "Off: one fixed ratio for every photo.",
-    "Größe": "Size",
+    "Grösse": "Size",
     "Kantenlänge im Quadrat. Das Seitenverhältnis kommt von der ":
         "Edge length as a square. The aspect ratio comes from the ",
-    "Größenstufe wirkt erst wieder, wenn dort nichts angeschlossen ist ":
+    "Grössenstufe wirkt erst wieder, wenn dort nichts angeschlossen ist ":
         "The size step applies again once nothing is wired there ",
     "oder das Format gewürfelt wird.": "or the ratio is rolled.",
-    "von außen": "external",
-    "Das Rauschen hat Bildmaße. Ändert sich das Seitenverhältnis, ist es ":
+    "von aussen": "external",
+    "Das Rauschen hat Bildmasse. Ändert sich das Seitenverhältnis, ist es ":
         "Noise has image dimensions. If the aspect ratio changes it is ",
     "teilt einen Seed, dann bleibt der Schauplatz über die Fotos gleich.":
         "shares one seed, which keeps the setting the same across photos.",
-    "Format würfelt — bei wechselnder Größe wirkt der Serien-Seed nicht":
+    "Format würfelt — bei wechselnder Grösse wirkt der Serien-Seed nicht":
         "Ratio is rolling — with changing size the series seed has no effect",
     "s je Bild, gemessen an den letzten Läufen":
         "s per image, measured from recent runs",

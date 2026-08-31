@@ -138,7 +138,7 @@
       ],
       "properties": {
         "Node name for S&R": "Krea2PersonBuilder",
-        "personState": "{\"felder\": {\"gender\": \"Frau\", \"age\": \"Ende 20\", \"ethnicity\": \"Skandinavisch\", \"skinTone\": \"Sehr hell\", \"complexion\": \"Natürliche Poren\", \"height\": \"Groß\", \"figure\": \"Athletisch\", \"shoulders\": \"Sportlich\", \"hair\": \"Lange Wellen\", \"hairColor\": \"Rot / Kupfer\", \"eyeShape\": \"Mandelförmig\", \"eyes\": \"Graugrün\", \"cheekbones\": \"Hoch betont\", \"nose\": \"Gerade\", \"lipColor\": \"Altrosa\", \"lipFinish\": \"Matt\", \"hosiery\": \"Nackte Beine\", \"shoes\": \"Combat Boots\", \"shoesColor\": \"Schwarz\"}, \"mehrfach\": {\"skinFeatures\": [\"Sommersprossen\"]}, \"texte\": {\"ageExact\": \"\", \"details\": \"wearing a charcoal wool coat\"}, \"sektion\": \"Gesicht\", \"gruppe\": {\"shoes\": \"alle\"}}"
+        "personState": "{\"felder\": {\"gender\": \"Frau\", \"age\": \"Ende 20\", \"ethnicity\": \"Skandinavisch\", \"skinTone\": \"Sehr hell\", \"complexion\": \"Natürliche Poren\", \"height\": \"Gross\", \"figure\": \"Athletisch\", \"shoulders\": \"Sportlich\", \"hair\": \"Lange Wellen\", \"hairColor\": \"Rot / Kupfer\", \"eyeShape\": \"Mandelförmig\", \"eyes\": \"Graugrün\", \"cheekbones\": \"Hoch betont\", \"nose\": \"Gerade\", \"lipColor\": \"Altrosa\", \"lipFinish\": \"Matt\", \"hosiery\": \"Nackte Beine\", \"shoes\": \"Combat Boots\", \"shoesColor\": \"Schwarz\"}, \"mehrfach\": {\"skinFeatures\": [\"Sommersprossen\"]}, \"texte\": {\"ageExact\": \"\", \"details\": \"wearing a charcoal wool coat\"}, \"sektion\": \"Gesicht\", \"gruppe\": {\"shoes\": \"alle\"}}"
       },
       "title": "1 — build the person"
     },
