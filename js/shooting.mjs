@@ -28,8 +28,10 @@ const PROP = "shootingState";
 // only in Python.
 const VORGABE = {
   anzahl: 12,
-  aktiv: { kamera: true, pose: true, ausdruck: true, format: true, fokus: true,
-           rausch: true },
+  aktiv: {
+    kamera: true, pose: true, ausdruck: true, format: true, fokus: true,
+    rausch: true
+  },
   pools: {},
   kameras: null, // null = alle
   fokusse: null,
@@ -106,8 +108,10 @@ function pool(d, quelle, cat, state, kamera, haltung, stimmung) {
     return alle.filter((l) => erlaubt.includes(l));
   }
   // Tension, arms and legs against the base posture, same reasoning.
-  const kopplung = { spannung: d.haltungSpannung, arme: d.haltungArme,
-                     beine: d.haltungBeine, raum: d.haltungRaum }[cat];
+  const kopplung = {
+    spannung: d.haltungSpannung, arme: d.haltungArme,
+    beine: d.haltungBeine, raum: d.haltungRaum
+  }[cat];
   if (kopplung && haltung && kopplung[haltung]) {
     const erlaubt = kopplung[haltung];
     const gefiltert = alle.filter((l) => erlaubt.includes(l));
@@ -142,8 +146,8 @@ function plane(d, state, lauf) {
       // The same holds for haltung against spannung: d.felder follows FOLGE,
       // which puts the base posture first and the body tension last.
       const label = waehle(pool(d, f.quelle, f.cat, state, kamera, pose.haltung,
-                                ausdruck.stimmung),
-                           lauf, platz, d);
+        ausdruck.stimmung),
+        lauf, platz, d);
       (f.quelle === "pose" ? pose : ausdruck)[f.cat] = label;
     }
   });
@@ -325,6 +329,9 @@ function baue(node, d) {
   }
 
   async function starte(anzahl) {
+    const loraWidget = node.widgets?.find((w) => w.name === "lora_mode");
+    const loraAktiv = !!(loraWidget && loraWidget.value);
+    const zielAnzahl = loraAktiv ? 45 : anzahl;
     // Set the counter to 0 and to increment, so that the series starts at
     // photo 1 and not where the last run left off.
     const seedW = node.widgets?.find((w) => w.name === "seed");
@@ -334,7 +341,7 @@ function baue(node, d) {
     );
     if (ctrl) ctrl.value = "increment";
     try {
-      await app.queuePrompt(0, anzahl);
+      await app.queuePrompt(0, zielAnzahl);
     } catch (e) {
       console.error("[Photoshoot] Einreihen fehlgeschlagen:", e);
     }
@@ -469,8 +476,8 @@ function baue(node, d) {
         hinweis: uet("Kameraeinstellung über die Serie variieren", "ui"),
         inhalt: state.aktiv?.kamera
           ? () => chipreihe(d.kamera, state.kameras,
-                            (n) => schreib({ ...state, kameras: n }), null,
-                            "shooting/kamera")
+            (n) => schreib({ ...state, kameras: n }), null,
+            "shooting/kamera")
           : null,
       },
       {
@@ -496,11 +503,11 @@ function baue(node, d) {
             ? zaehlstand(d.fokus, state.fokusse)
             : uet("keiner passt", "ui"),
         hinweis: uet("Bildschwerpunkt variieren (Gesicht, Beine, Füße …). Welche ", "ui") +
-                 uet("möglich sind, hängt von den gewählten Kameraeinstellungen ab.", "ui"),
+          uet("möglich sind, hängt von den gewählten Kameraeinstellungen ab.", "ui"),
         inhalt: state.aktiv?.fokus
           ? () => chipreihe(d.fokus, state.fokusse,
-                            (n) => schreib({ ...state, fokusse: n }), erreichbar,
-                            "shooting/fokus")
+            (n) => schreib({ ...state, fokusse: n }), erreichbar,
+            "shooting/fokus")
           : null,
       },
       {
@@ -512,18 +519,18 @@ function baue(node, d) {
             ? (extern ? `${extern[0]}×${extern[1]}` : uet("von außen", "ui"))
             : state.festesFormat || "2:3",
         hinweis: uet("An: Seitenverhältnis passend zur Kameraeinstellung würfeln. ", "ui") +
-                 uet("Aus: ein festes Verhältnis für alle Fotos.", "ui"),
+          uet("Aus: ein festes Verhältnis für alle Fotos.", "ui"),
         // With dimensions arriving there is nothing to choose - the upstream
         // node determines the resolution.
         inhalt: !state.aktiv?.format && !massAnliegend
           ? () => auswahl(
-              Object.keys(d.ratios).map((r) => {
-                const [w, h] = masseFuer(d, r, state.groesse || d.kanteStandard);
-                return { wert: r, text: `${r}  ·  ${w}×${h}` };
-              }),
-              state.festesFormat || "2:3",
-              (v) => schreib({ ...state, festesFormat: v }),
-            )
+            Object.keys(d.ratios).map((r) => {
+              const [w, h] = masseFuer(d, r, state.groesse || d.kanteStandard);
+              return { wert: r, text: `${r}  ·  ${w}×${h}` };
+            }),
+            state.festesFormat || "2:3",
+            (v) => schreib({ ...state, festesFormat: v }),
+          )
           : null,
       },
       {
@@ -533,7 +540,7 @@ function baue(node, d) {
           ? uet("pro Foto", "ui")
           : uetf("Seed {0}", "ui", state.serienSeed ?? 0),
         hinweis: uet("An: jedes Foto bekommt eigenes Rauschen. Aus: die ganze Serie ", "ui") +
-                 uet("teilt einen Seed, dann bleibt der Schauplatz über die Fotos gleich.", "ui"),
+          uet("teilt einen Seed, dann bleibt der Schauplatz über die Fotos gleich.", "ui"),
         inhalt: state.aktiv?.rausch ? null : seedFeld,
       },
     ];
@@ -570,17 +577,17 @@ function baue(node, d) {
     if (state.aktiv?.fokus && !fokusWirksam.length) {
       const namen = fokusGewaehlt.map((f) => uet(f, "shooting/fokus")).join(", ");
       warne(`⚠ ${namen} ` + uet("passt zu keiner gewählten Einstellung", "ui") + " " +
-            uet("— es kommt gar kein Schwerpunkt in den Prompt", "ui"),
-            uet("Der Schwerpunkt ist an die Kameraeinstellung gekoppelt. Entweder ", "ui") +
-            uet("eine passende Einstellung dazuwählen oder einen anderen ", "ui") +
-            uet("Schwerpunkt. Die durchgestrichenen Einträge sind die, die mit den ", "ui") +
-            uet("aktuellen Einstellungen nicht vorkommen können.", "ui"));
+        uet("— es kommt gar kein Schwerpunkt in den Prompt", "ui"),
+        uet("Der Schwerpunkt ist an die Kameraeinstellung gekoppelt. Entweder ", "ui") +
+        uet("eine passende Einstellung dazuwählen oder einen anderen ", "ui") +
+        uet("Schwerpunkt. Die durchgestrichenen Einträge sind die, die mit den ", "ui") +
+        uet("aktuellen Einstellungen nicht vorkommen können.", "ui"));
     } else if (state.aktiv?.fokus && fokusWirksam.length < fokusGewaehlt.length) {
       const tot = fokusGewaehlt
         .filter((f) => !erreichbar.has(f))
         .map((f) => uet(f, "shooting/fokus"));
       warne(`${tot.join(", ")} ` + uet("kommt mit den gewählten Einstellungen nicht vor", "ui"),
-            uet("Nicht schlimm - die übrigen Schwerpunkte greifen weiterhin.", "ui"));
+        uet("Nicht schlimm - die übrigen Schwerpunkte greifen weiterhin.", "ui"));
     }
     // A fixed seed only holds the setting together while the image size stays
     // the same: the noise is a tensor in image dimensions, and a different ratio
@@ -588,8 +595,8 @@ function baue(node, d) {
     // broken.
     if (!state.aktiv?.rausch && state.aktiv?.format) {
       warne("⚠ " + uet("Format würfelt — bei wechselnder Größe wirkt der Serien-Seed nicht", "ui"),
-            uet("Das Rauschen hat Bildmaße. Ändert sich das Seitenverhältnis, ist es ", "ui") +
-            uet("ein anderes Rauschfeld, auch bei gleichem Seed.", "ui"));
+        uet("Das Rauschen hat Bildmaße. Ändert sich das Seitenverhältnis, ist es ", "ui") +
+        uet("ein anderes Rauschfeld, auch bei gleichem Seed.", "ui"));
     }
 
     // --- size, applies to every axis -----------------------------------------
@@ -712,7 +719,7 @@ function baue(node, d) {
   const CHROM = 104; // title, seed row, outputs
   const w = node.addDOMWidget("k2_shooting", "custom", root, {
     getValue: () => node.properties?.[PROP],
-    setValue: () => {},
+    setValue: () => { },
     getMinHeight: () => 240,
     getMaxHeight: () => Math.max(240, (node.size?.[1] || 560) - CHROM),
     margin: 4,

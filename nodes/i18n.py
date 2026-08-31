@@ -35,7 +35,7 @@ PERSON = {
     },
     "ethnicity": {
         "Osteuropäisch": "Eastern European", "Skandinavisch": "Scandinavian",
-        "Mediterran": "Mediterranean", "Nahöstlich": "Middle Eastern",
+        "Mediterran": "Mediterranean", "Kaukasisch": "Caucasian", "Nahöstlich": "Middle Eastern",
         "Latina": "Latina", "Ostasiatisch": "East Asian",
         "Südostasiatisch": "Southeast Asian", "Südasiatisch": "South Asian",
         "Afrikanisch": "African", "Gemischt": "Mixed",
@@ -46,7 +46,7 @@ PERSON = {
         "Dunkelbraun": "Deep brown", "Ebenholz": "Deep ebony",
     },
     "complexion": {
-        "Dewy": "Dewy", "Matt": "Matte", "Porzellan": "Porcelain",
+        "Dewy": "Dewy", "Matt": "Matte", "Porzellan": "Porcelain", "Glatt": "Smooth",
         "Glas-Haut": "Glass skin", "Geölt / Wet-Glow": "Oiled wet-glow",
         "Natürliche Poren": "Natural pores", "Sonnengegerbt": "Weathered",
         "Rötlich": "Rosy", "Blass": "Pale",
@@ -58,7 +58,7 @@ PERSON = {
     },
     "figure": {
         "Sehr schlank": "Very slim", "Schlank": "Slim", "Schlank definiert": "Lean toned",
-        "Athletisch": "Athletic", "Durchschnittlich": "Average", "Kurvig": "Curvy",
+        "Athletisch": "Athletic", "Sportlich Kurvig": "Fit and curvy", "Durchschnittlich": "Average", "Kurvig": "Curvy",
         "Sanduhr": "Hourglass", "Birnenform": "Pear-shaped",
         "Mollig": "Chubby", "Plus-Size": "Plus-size", "Stämmig": "Stocky",
         "Muskulös": "Muscular",
@@ -101,8 +101,8 @@ PERSON = {
     },
     "hairColor": {
         "Blond": "Blonde", "Platinblond": "Platinum blonde",
-        "Dunkelblond": "Dark blonde", "Braun": "Brown",
-        "Dunkelbraun": "Dark brown", "Schwarz": "Black",
+        "Dunkelblond": "Dark blonde", "Dreckig Blond": "Dirty blonde", "Hellbraun": "Light brown",
+        "Braun": "Brown", "Dunkelbraun": "Dark brown", "Schwarz": "Black",
         "Rot / Kupfer": "Copper red", "Kastanie": "Auburn",
         "Erdbeerblond": "Strawberry blonde", "Grau / Silber": "Silver grey",
         "Eisweiß": "Icy white", "Pastellrosa": "Pastel pink",
@@ -158,6 +158,8 @@ PERSON = {
         "Lowlights": "Lowlights", "Dip-Dye": "Dip-dye",
         "Zweifarbig": "Two-tone", "Graue Strähne": "Silver streak",
         "Ansatz sichtbar": "Visible roots",
+        "Malteserkreuz-Balayage": "Maltese cross balayage", "Goldener Unterton": "Golden undertone",
+        "Helle Strähnen": "Bright highlights", "Helle Strähne": "Platinum blonde streak",
     },
     "lashes": {
         "Natürlich": "Natural", "Lang": "Long", "Voluminös": "Voluminous",
@@ -207,7 +209,7 @@ PERSON = {
         "Schönheitsfleck": "Beauty mark", "Grübchen": "Dimples",
         "Muttermale": "Moles", "Tattoos": "Tattoos", "Piercings": "Piercings",
         "Sommerbräune": "Sun-kissed", "Vitiligo": "Vitiligo",
-        "Feine Narbe": "Delicate scar", "Nasenring / Septum": "Septum ring",
+        "Feine Narbe": "Delicate scar", "Nasenring / Septum": "Septum ring", "Nasenring": "Nose ring"
     },
     "nailLength": {
         "Kurz gepflegt": "Short", "Mittel": "Medium", "Lang": "Long",
@@ -267,9 +269,9 @@ PERSON = {
     },
     "eyewear": {
         "Brille schmal": "Rectangular glasses", "Brille rund": "Round glasses",
-        "Hornbrille": "Thick-rimmed glasses", "Lesebrille": "Reading glasses",
-        "Sonnenbrille": "Sunglasses", "Pilotenbrille": "Aviators",
-        "Cat-Eye-Brille": "Cat-eye glasses",
+        "Nerd-Brille": "Black square glasses", "Hornbrille": "Thick-rimmed glasses",
+        "Lesebrille": "Reading glasses", "Sonnenbrille": "Sunglasses",
+        "Pilotenbrille": "Aviators", "Cat-Eye-Brille": "Cat-eye glasses",
     },
     "headwear": {
         "Stirnband": "Headband", "Haarreif": "Hair band", "Mütze": "Beanie",

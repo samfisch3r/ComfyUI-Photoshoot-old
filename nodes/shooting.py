@@ -211,6 +211,726 @@ DEFAULT_STATE = {
 }
 
 
+def _lora_mode_index(seed=0):
+    """Map a 0-based series counter to a valid 45-slot LoRA preset index."""
+    return int(seed) % 45
+
+
+def _lora_mode_plan(seed=0):
+    """Hardcoded 45-shot LoRA preset keyed by the run index."""
+    idx = _lora_mode_index(seed)
+    
+    # Initialize using your exact internal matrix token values
+    daten = {
+        "kamera": "Porträt",
+        "fokus": "Gesicht",
+        "pose": {},
+        "ausdruck": {},
+        "scene": "isolated on a seamless pure white backdrop, professional studio lighting, shadowless, clean minimalist background",
+        "style": "professional studio photography, high-end commercial fashion portfolio, crisp sharp details, 85mm lens",
+        "person_bits": [],
+    }
+
+    # =====================================================================
+    # BLOCK 1 (00-03): WHITE STUDIO - FRONTAL FACIAL ANCHORS
+    # =====================================================================
+    if 0 <= idx <= 3:
+        if idx == 0:
+            daten["kamera"] = "Nahaufnahme"
+            daten["fokus"] = "Gesicht"
+            daten["ausdruck"] = {"stimmung": "Gelassen"}
+            daten["scene"] = "isolated on a seamless pure white backdrop, professional studio lighting configuration, clean setup"
+            daten["pose"] = {
+                "haltung": "standing",
+                "raum": "the subject centered in the middle ground",
+                "koerper": "facing the camera directly",
+                "arme": "arms hanging relaxed at the sides",
+                "beine": "legs closed together",
+                "spannung": "with an upright posture",
+            }
+        elif idx == 1:
+            daten["kamera"] = "Detail"
+            daten["fokus"] = "Augen"
+            daten["ausdruck"] = {"stimmung": "Sanftes Lächeln"}
+            daten["scene"] = "set against a pristine solid white studio backdrop, bright wrapping softbox panel illumination"
+            daten["style"] = "premium editorial fashion headshot portraiture, sharp focal clarity, clean diffuse studio light pass"
+            daten["pose"] = {
+                "haltung": "Stehend",
+                "raum": "Bildmitte",
+                "koerper": "Leicht zur Seite gedreht",
+                "arme": "Eine Hand am Gesicht",
+                "beine": "Leicht geöffnet",
+                "spannung": "Entspannt",
+            }
+        elif idx == 2:
+            daten["kamera"] = "Porträt"
+            daten["fokus"] = "Gesicht"
+            daten["ausdruck"] = {"stimmung": "Ernst"}
+            daten["scene"] = "positioned on a seamless minimalist white backdrop, high-end commercial flash setup, shadowless"
+            daten["style"] = "commercial beauty portfolio photography, crisp high-end textures, flawless zero-shadow rendering"
+            daten["pose"] = {
+                "haltung": "Stehend",
+                "raum": "Vordergrund",
+                "koerper": "Dreiviertelansicht",
+                "arme": "Hände auf den Hüften",
+                "beine": "Leicht geöffnet",
+                "spannung": "Schultern zurück",
+            }
+        elif idx == 3:
+            daten["kamera"] = "Nahaufnahme"
+            daten["fokus"] = "Augen"
+            daten["ausdruck"] = {"stimmung": "Konzentriert"}
+            daten["scene"] = "isolated on a clean uniform pure white backdrop, perfectly calibrated studio key lights"
+            daten["style"] = "magazine headshot studio portfolio, crisp sharp optical separation, clean commercial beauty setup"
+            daten["pose"] = {
+                "haltung": "Stehend",
+                "raum": "Bildmitte",
+                "koerper": "Dreiviertelansicht",
+                "arme": "Hände auf den Hüften",
+                "beine": "Geschlossen",
+                "spannung": "Aufrecht",
+            }
+
+    # =====================================================================
+    # BLOCK 2 (04-08): WHITE STUDIO - PROFILE ANCHORS
+    # =====================================================================
+    elif 4 <= idx <= 8:
+        daten["fokus"] = "Gesicht"
+        if idx == 4:
+            daten["kamera"] = "Nahaufnahme"
+            daten["ausdruck"] = {"stimmung": "Stoisch"}
+            daten["pose"] = {
+                "haltung": "Stehend",
+                "raum": "Am Fenster",
+                "koerper": "Im Profil",
+                "arme": "Vor der Brust verschränkt",
+                "beine": "Geschlossen",
+                "spannung": "Aufrecht",
+            }
+            daten["scene"] = "isolated on a seamless pure white backdrop, left side profile viewpoint orientation, clean studio layout"
+        elif idx == 5:
+            daten["kamera"] = "Porträt"
+            daten["ausdruck"] = {"stimmung": "Gelassen"}
+            daten["pose"] = {
+                "haltung": "Stehend",
+                "raum": "Bildmitte",
+                "koerper": "Im Profil",
+                "arme": "Eine Hand am Gesicht",
+                "beine": "Leicht geöffnet",
+                "spannung": "Entspannt",
+            }
+            daten["scene"] = "set against a pristine white studio backdrop, left profile angle showing the right side of her face"
+        elif idx == 6:
+            daten["kamera"] = "Nahaufnahme"
+            daten["ausdruck"] = {"stimmung": "Ernst"}
+            daten["pose"] = {
+                "haltung": "Stehend",
+                "raum": "Am Fenster",
+                "koerper": "Im Profil",
+                "arme": "Seitlich hängend",
+                "beine": "Geschlossen",
+                "spannung": "Schultern zurück",
+            }
+            daten["scene"] = "isolated on a seamless pure white backdrop, right side profile viewpoint orientation, sharp setup"
+        elif idx == 7:
+            daten["kamera"] = "Porträt"
+            daten["ausdruck"] = {"stimmung": "Entspannt"}
+            daten["pose"] = {
+                "haltung": "Stehend",
+                "raum": "Bildmitte",
+                "koerper": "Im Profil",
+                "arme": "Hände auf den Hüften",
+                "beine": "Leicht geöffnet",
+                "spannung": "Entspannt",
+            }
+            daten["scene"] = "set against a clean uniform white backdrop, elegant profile angled viewpoint tracking configuration"
+        elif idx == 8:
+            daten["kamera"] = "Halbtotale"
+            daten["fokus"] = "Oberkörper"
+            daten["ausdruck"] = {"stimmung": "Unbeeindruckt"}
+            daten["pose"] = {
+                "haltung": "Sitzend",
+                "raum": "Bildmitte",
+                "koerper": "Frontal zur Kamera",
+                "arme": "Hände im Schoß",
+                "beine": "Übereinandergeschlagen",
+                "spannung": "Entspannt",
+            }
+            daten["scene"] = "isolated on a seamless pure white backdrop, clean upper body mid-shot framing setup, studio illumination"
+
+    # =====================================================================
+    # BLOCK 3 (09-13): WHITE STUDIO - POSTURE & BODY ANCHORS
+    # =====================================================================
+    elif 9 <= idx <= 13:
+        daten["scene"] = "isolated on a seamless pure white backdrop, professional studio lighting, shadowless, clean minimalist background"
+        daten["style"] = "professional studio photography, high-end commercial fashion portfolio, crisp sharp details, 85mm lens"
+        if idx == 9:
+            daten["kamera"] = "Halbtotale"
+            daten["fokus"] = "Oberkörper"
+            daten["ausdruck"] = {"stimmung": "Entspannt"}
+            daten["pose"] = {
+                "haltung": "Auf einem Hocker sitzend",
+                "raum": "Bildmitte",
+                "koerper": "Frontal zur Kamera",
+                "arme": "Hände auf den Knien",
+                "beine": "Geschlossen",
+                "spannung": "Entspannt",
+            }
+        elif idx == 10:
+            daten["kamera"] = "Ganzkörper"
+            daten["fokus"] = "Ganze Figur"
+            daten["ausdruck"] = {"stimmung": "Selbstbewusst"}
+            daten["pose"] = {
+                "haltung": "Stehend",
+                "raum": "Bildmitte",
+                "koerper": "Leicht zur Seite gedreht",
+                "arme": "Eine Hand am Gesicht",
+                "beine": "Leicht geöffnet",
+                "spannung": "Schultern zurück",
+            }
+        elif idx == 11:
+            daten["kamera"] = "Halbtotale"
+            daten["fokus"] = "Oberkörper"
+            daten["ausdruck"] = {"stimmung": "Zufrieden"}
+            daten["pose"] = {
+                "haltung": "Sitzend",
+                "raum": "Bildmitte",
+                "koerper": "Frontal zur Kamera",
+                "arme": "Hände auf den Knien",
+                "beine": "Übereinandergeschlagen",
+                "spannung": "Entspannt",
+            }
+        elif idx == 12:
+            daten["kamera"] = "Amerikanisch"
+            daten["fokus"] = "Taille"
+            daten["ausdruck"] = {"stimmung": "Neutral"}
+            daten["pose"] = {
+                "haltung": "Angelehnt",
+                "raum": "An der Wand",
+                "koerper": "Dreiviertelansicht",
+                "arme": "Vor der Brust verschränkt",
+                "beine": "Leicht geöffnet",
+                "spannung": "Entspannt",
+            }
+        elif idx == 13:
+            daten["kamera"] = "Ganzkörper"
+            daten["fokus"] = "Ganze Figur"
+            daten["ausdruck"] = {"stimmung": "Selbstbewusst"}
+            daten["pose"] = {
+                "haltung": "Auf dem Boden sitzend",
+                "raum": "Bildmitte",
+                "koerper": "Frontal zur Kamera",
+                "arme": "Hinter sich abgestützt",
+                "beine": "Ausgestreckt",
+                "spannung": "Rücken durchgedrückt",
+            }
+               
+    # =====================================================================
+    # BLOCK 4 (14-18): ORGANIC NATURE - ENVIRONMENT CONTEXT BREAKERS
+    # =====================================================================
+    elif 14 <= idx <= 18:
+        if idx == 14:
+            daten["kamera"] = "Halbtotale"
+            daten["fokus"] = "Oberkörper"
+            daten["ausdruck"] = {"stimmung": "Gelassen"}
+            daten["scene"] = "standing deep inside a lush green pine forest, volumetric sunbeams filtering through the tree canopy"
+            daten["style"] = "natural light outdoor photography, golden hour rim lighting, beautiful organic lens flare, soft shallow depth of field"
+            daten["person_bits"] = ["wearing a basic soft gray crewneck cotton t-shirt with loose fabric folds"]
+            daten["pose"] = {
+                "haltung": "Stehend",
+                "raum": "Zwischen Möbeln",
+                "koerper": "Frontal zur Kamera",
+                "arme": "Seitlich hängend",
+                "beine": "Leicht geöffnet",
+                "spannung": "Entspannt",
+            }
+            
+        elif idx == 15:
+            daten["kamera"] = "Porträt"
+            daten["fokus"] = "Gesicht"
+            daten["ausdruck"] = {"stimmung": "Entspannt"}
+            daten["scene"] = "positioned in a dense forest clearing, surrounded by massive tall evergreen trees and wild ferns"
+            daten["style"] = "vibrant outdoor editorial portraiture, soft diffused morning daylight, crisp sharp leaf detail textures"
+            daten["person_bits"] = ["wearing a classic plain gray short-sleeve cotton t-shirt with slight shadows on the chest"]
+            daten["pose"] = {
+                "haltung": "Angelehnt",
+                "raum": "Am Fenster",
+                "koerper": "Dreiviertelansicht",
+                "arme": "Eine Hand am Gesicht",
+                "beine": "Leicht geöffnet",
+                "spannung": "Entspannt",
+            }
+            
+        elif idx == 16:
+            daten["kamera"] = "Amerikanisch"
+            daten["fokus"] = "Taille"
+            daten["ausdruck"] = {"stimmung": "Zufrieden"}
+            daten["scene"] = "standing on an earthy dirt path winding through a deep woodland area with scattered autumn leaves"
+            daten["style"] = "moody lifestyle nature portfolio, late afternoon sun flares, warm golden wash tones, cinematic framing"
+            daten["person_bits"] = ["wearing a casual everyday gray crewneck t-shirt, lightweight organic cotton material"]
+            daten["pose"] = {
+                "haltung": "Stehend",
+                "raum": "Gehend durch den Raum",
+                "koerper": "Frontal zur Kamera",
+                "arme": "Hände in den Hosentaschen",
+                "beine": "Leicht geöffnet",
+                "spannung": "Entspannt",
+            }
+            
+        elif idx == 17:
+            daten["kamera"] = "Nahaufnahme"
+            daten["fokus"] = "Augen"
+            daten["ausdruck"] = {"stimmung": "Verträumt"}
+            daten["scene"] = "low-angle perspective in a dense forest environment, thick forest floor covered in green moss"
+            daten["style"] = "high-end commercial outdoor capture, crisp environmental depth of field, sharp background bokeh circles"
+            daten["person_bits"] = ["wearing a simple soft gray knit cotton t-shirt with natural creases along the waist"]
+            daten["pose"] = {
+                "haltung": "Hockend",
+                "raum": "Bildmitte",
+                "koerper": "Frontal zur Kamera",
+                "arme": "Arme umschlingen die Knie",
+                "beine": "Angewinkelt",
+                "spannung": "Zusammengekauert",
+            }
+            
+        else: # Index 18
+            daten["kamera"] = "Halbtotale"
+            daten["fokus"] = "Hände"
+            daten["ausdruck"] = {"stimmung": "Sanftes Lächeln"}
+            daten["scene"] = "resting in a sun-drenched wooded grove, soft sunbeams breaking through high branches"
+            daten["style"] = "airy cinematic outdoor photography, brilliant specular sun flare artifacts, rich organic color rendering"
+            daten["person_bits"] = ["wearing a minimalist short-sleeve plain gray t-shirt with clean shoulder seams"]
+            daten["pose"] = {
+                "haltung": "Auf dem Boden sitzend",
+                "raum": "Bildmitte",
+                "koerper": "Frontal zur Kamera",
+                "arme": "Hände im Schoß",
+                "beine": "Übereinandergeschlagen",
+                "spannung": "Entspannt",
+            }
+
+    # =====================================================================
+    # BLOCK 5 (19-23): NIGHT CYBER CITY - CHROMATIC CONTEXT BREAKERS
+    # =====================================================================
+    elif 19 <= idx <= 23:
+        if idx == 19:
+            daten["kamera"] = "Amerikanisch"
+            daten["fokus"] = "Taille"
+            daten["ausdruck"] = {"stimmung": "Selbstbewusst"}
+            daten["scene"] = "walking along a wet asphalt sidewalk in a dark neon-lit city street environment at night, colorful pink light reflections on puddles"
+            daten["style"] = "cinematic nighttime photography, moody anamorphic lighting, striking pink and vibrant cyan blue ambient bokeh color tones"
+            daten["person_bits"] = ["wearing a heavy leather motorcycle zip-up jacket with a structured collar, silver asymmetric zipper tracks"]
+            daten["pose"] = {
+                "haltung": "Gehend",
+                "raum": "Gehend durch den Raum",
+                "koerper": "Leicht zur Seite gedreht",
+                "arme": "Seitlich hängend",
+                "beine": "Leicht geöffnet",
+                "spannung": "Angespannt",
+            }
+            
+        elif idx == 20:
+            daten["kamera"] = "Nahaufnahme"
+            daten["fokus"] = "Gesicht"
+            daten["ausdruck"] = {"stimmung": "Konzentriert"}
+            daten["scene"] = "positioned in a dark urban alleyway setting at night, vibrant cyan blue glowing neon shop signs in blurred background"
+            daten["style"] = "high-contrast cyberpunk aesthetic portraiture, intense dual-tone neon color grading, sharp specular skin reflections"
+            daten["person_bits"] = ["wearing a premium thick leather jacket with metallic zippers and dual collar snaps, open front design"]
+            daten["pose"] = {
+                "haltung": "Stehend",
+                "raum": "Bildmitte",
+                "koerper": "Frontal zur Kamera",
+                "arme": "Vor der Brust verschränkt",
+                "beine": "Geschlossen",
+                "spannung": "Schultern zurück",
+            }
+            
+        elif idx == 21:
+            daten["kamera"] = "Halbtotale"
+            daten["fokus"] = "Oberkörper"
+            daten["ausdruck"] = {"stimmung": "Herausfordernd"}
+            daten["scene"] = "standing in front of a futuristic storefront window displaying glowing pink neon geometric light tube installations"
+            daten["style"] = "editorial fashion nighttime shoot, deep high-contrast shadows, rich saturated ambient magenta color wash, 50mm lens look"
+            daten["person_bits"] = ["wearing an edgy leather biker jacket with prominent shoulder padding and silver metallic hardware details"]
+            daten["pose"] = {
+                "haltung": "Angelehnt",
+                "raum": "Am Fenster",
+                "koerper": "Dreiviertelansicht",
+                "arme": "Hände auf den Hüften",
+                "beine": "Leicht geöffnet",
+                "spannung": "Entspannt",
+            }
+            
+        elif idx == 22:
+            daten["kamera"] = "Amerikanisch"
+            daten["fokus"] = "Taille"
+            daten["ausdruck"] = {"stimmung": "Ernst"}
+            daten["scene"] = "on a wet metropolitan street pavement at night, surrounded by towering city buildings and soft glowing ambient street lamps"
+            daten["style"] = "moody urban cinematic photography, sharp out-of-focus background traffic bokeh lights, strong directional side illumination"
+            daten["person_bits"] = ["wearing a structured heavy leather zip-up coat, thick textured leather material with visible matte grain folds"]
+            daten["pose"] = {
+                "haltung": "Stehend",
+                "raum": "Bildmitte",
+                "koerper": "Frontal zur Kamera",
+                "arme": "Seitlich hängend",
+                "beine": "Leicht geöffnet",
+                "spannung": "Aufrecht",
+            }
+            
+        else: # Index 23
+            daten["kamera"] = "Nahaufnahme"
+            daten["fokus"] = "Gesicht"
+            daten["ausdruck"] = {"stimmung": "Angespannt"}
+            daten["scene"] = "under a dark industrial scaffolding overhang on a city sidewalk, intense pink and purple neon signs reflecting on the wet ground"
+            daten["style"] = "avant-garde street photography, high-intensity color saturation, brilliant reflection detailing, anamorphic lens flares"
+            daten["person_bits"] = ["wearing a sharp modern leather motorcycle jacket with sleek lapels and buttoned wrist cuff adjustments"]
+            daten["pose"] = {
+                "haltung": "Stehend",
+                "raum": "Bildmitte",
+                "koerper": "Leicht zur Seite gedreht",
+                "arme": "Eine Hand am Gesicht",
+                "beine": "Leicht geöffnet",
+                "spannung": "Angespannt",
+            }
+
+    # =====================================================================
+    # BLOCK 6 (24-28): LOW-LIGHT CHIAROSCURO - HAIR & SHADOW BREAKERS
+    # =====================================================================
+    elif 24 <= idx <= 28:
+        if idx == 24:
+            daten["kamera"] = "Halbtotale"
+            daten["fokus"] = "Rücken"
+            daten["ausdruck"] = {"stimmung": "Nachdenklich"}
+            daten["scene"] = "positioned inside a cozy dim room near a roaring brick fireplace, dark moody indoor scene background"
+            daten["style"] = "high-contrast chiaroscuro photography, dynamic directional lighting from a warm amber flame source, deep dramatic shadows"
+            daten["person_bits"] = ["hair completely styled up into a tight clean high bun, exposing the neck and ears, wearing a simple top with thin spaghetti shoulder straps"]
+            daten["pose"] = {
+                "haltung": "Auf einem Hocker sitzend",
+                "raum": "Bildmitte",
+                "koerper": "Von hinten",
+                "arme": "Hände auf den Knien",
+                "beine": "Geschlossen",
+                "spannung": "Entspannt",
+            }
+            
+        elif idx == 25:
+            daten["kamera"] = "Porträt"
+            daten["fokus"] = "Gesicht"
+            daten["ausdruck"] = {"stimmung": "Wehmütig"}
+            daten["scene"] = "resting in a shadowy rustic living space, illuminated by the bright amber glow of an open hearth"
+            daten["style"] = "fine art low-light portraiture, intimate warm side-lighting, high-contrast deep black shadow values"
+            daten["person_bits"] = ["hair styled into a neat high bun exposing the bare shoulders, wearing a minimalist camisole with thin straps"]
+            daten["pose"] = {
+                "haltung": "Sitzend",
+                "raum": "Bildmitte",
+                "koerper": "Im Profil",
+                "arme": "Hände auf den Knien",
+                "beine": "Übereinandergeschlagen",
+                "spannung": "Entspannt",
+            }
+            
+        elif idx == 26:
+            daten["kamera"] = "Nahaufnahme"
+            daten["fokus"] = "Dekolleté"
+            daten["ausdruck"] = {"stimmung": "Melancholisch"}
+            daten["scene"] = "sitting in a low-lit historic library room, warm light from a crackling stone fireplace nearby"
+            daten["style"] = "cinematic indoor photography, intense directional amber illumination, rich shadow textures, soft focus backdrop"
+            daten["person_bits"] = ["hair pulled up tightly into a sleek top knot bun, wearing a plain everyday spaghetti strap top"]
+            daten["pose"] = {
+                "haltung": "Auf einem Knie",
+                "raum": "Bildmitte",
+                "koerper": "Dreiviertelansicht",
+                "arme": "Hände auf den Knien",
+                "beine": "Ein Knie angewinkelt",
+                "spannung": "Entspannt",
+            }
+            
+        elif idx == 27:
+            daten["kamera"] = "Halbtotale"
+            daten["fokus"] = "Rücken"
+            daten["ausdruck"] = {"stimmung": "Grüblerisch"}
+            daten["scene"] = "in a dark minimalist den environment, a single active fireplace casting long deep shadows"
+            daten["style"] = "moody artistic portfolio capture, extreme directional lighting scheme, dramatic drop-shadows, high contrast"
+            daten["person_bits"] = ["hair bound neatly into a clean tight high bun layout, wearing a lightweight strappy top with soft fabric creases"]
+            daten["pose"] = {
+                "haltung": "Auf einem Stuhl sitzend",
+                "raum": "Bildmitte",
+                "koerper": "Von hinten",
+                "arme": "Hände auf den Knien",
+                "beine": "Geschlossen",
+                "spannung": "Zusammengesunken",
+            }
+            
+        else: # Index 28
+            daten["kamera"] = "Porträt"
+            daten["fokus"] = "Gesicht"
+            daten["ausdruck"] = {"stimmung": "Lustvoll"}
+            daten["scene"] = "positioned on the floor of a dim cabin interior, rich dark background with soft flickering firelight"
+            daten["style"] = "atmospheric interior fashion photography, warm flame-lit highlights, deep rich ambient shadow grading"
+            daten["person_bits"] = ["hair securely styled up into a flawless high bun revealing the neckline, wearing a simple tank top with delicate shoulder straps"]
+            daten["pose"] = {
+                "haltung": "Zurückgelehnt",
+                "raum": "Bildmitte",
+                "koerper": "Frontal zur Kamera",
+                "arme": "Hände im Schoß",
+                "beine": "Ausgestreckt",
+                "spannung": "Entspannt",
+            }
+
+    # =====================================================================
+    # BLOCK 7 (29-31): BRUTALIST PLAZA - OVERHEAD HARSH LIGHT BREAKERS
+    # =====================================================================
+    elif 29 <= idx <= 31:
+        daten["style"] = "stark high-dynamic-range architectural photography, harsh overhead midday sunlight casting sharp deep black geometric shadows, high contrast"
+        daten["person_bits"] = ["hair pulled back tightly into a sleek long low ponytail, clear view of facial frame anatomy, wearing a crisp tailored dark charcoal gray business blazer suit"]
+        if idx == 29:
+            daten["kamera"] = "Ganzkörper"
+            daten["fokus"] = "Ganze Figur"
+            daten["ausdruck"] = {"stimmung": "Kühl"}
+            daten["pose"] = {
+                "haltung": "Stehend",
+                "raum": "Bildmitte",
+                "koerper": "Frontal zur Kamera",
+                "arme": "Vor der Brust verschränkt",
+                "beine": "Leicht geöffnet",
+                "spannung": "Aufrecht",
+            }
+            daten["scene"] = "standing in an expansive minimalist concrete brutalist architectural plaza courtyard, large surrounding gray concrete stone pavement, sharp stairs visible in background"
+        elif idx == 30:
+            daten["kamera"] = "Ganzkörper"
+            daten["fokus"] = "Ganze Figur"
+            daten["ausdruck"] = {"stimmung": "Ernst"}
+            daten["pose"] = {
+                "haltung": "Stehend",
+                "raum": "Bildmitte",
+                "koerper": "Frontal zur Kamera",
+                "arme": "Seitlich hängend",
+                "beine": "Geschlossen",
+                "spannung": "Aufrecht",
+            }
+            daten["scene"] = "positioned in a massive gray stone architectural plaza, clean straight lines and tall modular raw concrete brutalist structures towering in background"
+        elif idx == 31:
+            daten["kamera"] = "Amerikanisch"
+            daten["fokus"] = "Taille"
+            daten["ausdruck"] = {"stimmung": "Herausfordernd"}
+            daten["pose"] = {
+                "haltung": "Stehend",
+                "raum": "Bildmitte",
+                "koerper": "Im Profil",
+                "arme": "Hände auf den Hüften",
+                "beine": "Leicht geöffnet",
+                "spannung": "Schultern zurück",
+            }
+            daten["scene"] = "positioned against a colossal raw beige plaster and concrete architectural wall installation in a sunlit open courtyard"
+
+    # =====================================================================
+    # BLOCK 8 (32-38): FINALE CURATION & DATASET ENRICHMENT
+    # =====================================================================
+    elif 32 <= idx <= 38:
+        if idx == 32:
+            daten["kamera"] = "Nahaufnahme"
+            daten["fokus"] = "Gesicht"
+            daten["ausdruck"] = {"stimmung": "Gelassen"}
+            daten["scene"] = "studio setting, clean uniform solid mid-grey backdrop, perfectly calibrated studio key lights"
+            daten["style"] = "magazine editorial headshot portraiture, soft even commercial softbox diffuse panel lighting, zero shadows"
+            daten["person_bits"] = ["wearing a thick high-neck olive green wool knit turtleneck sweater, hair falling naturally down and tucked behind the shoulders"]
+            daten["pose"] = {
+                "haltung": "Stehend",
+                "raum": "Bildmitte",
+                "koerper": "Frontal zur Kamera",
+                "arme": "Seitlich hängend",
+                "beine": "Geschlossen",
+                "spannung": "Entspannt",
+            }
+        elif idx == 33:
+            daten["kamera"] = "Nahaufnahme"
+            daten["fokus"] = "Gesicht"
+            daten["ausdruck"] = {"stimmung": "Konzentriert"}
+            daten["scene"] = "studio setting, clean neutral solid mid-grey backdrop, bright diffused ambient studio environment look"
+            daten["style"] = "high-end studio lifestyle portraiture, crisp sharp eye detailing, professional micro-contrast rendering"
+            daten["person_bits"] = ["wearing a thick high-neck olive green wool knit turtleneck sweater, long hair layout draped forward over both shoulders in front"]
+            daten["pose"] = {
+                "haltung": "Stehend",
+                "raum": "Bildmitte",
+                "koerper": "Frontal zur Kamera",
+                "arme": "Hände auf den Hüften",
+                "beine": "Leicht geöffnet",
+                "spannung": "Schultern zurück",
+            }
+        elif idx == 34:
+            daten["kamera"] = "Halbtotale"
+            daten["fokus"] = "Oberkörper"
+            daten["ausdruck"] = {"stimmung": "Entspannt"}
+            daten["scene"] = "indoors, sitting casually perched on the edge of a rustic distressed dark wooden table, clean white interior room walls, large windows in soft-focus background letting in bright natural daylight"
+            daten["style"] = "natural modern lifestyle photography, bright open exposure, shallow depth of field bokeh, organic warm atmosphere"
+            daten["person_bits"] = ["hair loose and hanging naturally framing the profile, wearing an unbuttoned casual white long-sleeve cotton button-down shirt with a collar, wearing light blue denim jean shorts"]
+            daten["pose"] = {
+                "haltung": "Auf einem Stuhl sitzend",
+                "raum": "Bildmitte",
+                "koerper": "Frontal zur Kamera",
+                "arme": "Hände im Schoß",
+                "beine": "Geschlossen",
+                "spannung": "Entspannt",
+            }
+        elif idx == 35:
+            daten["kamera"] = "Amerikanisch"
+            daten["fokus"] = "Taille"
+            daten["ausdruck"] = {"stimmung": "Konzentriert"}
+            daten["scene"] = "nighttime city street background, heavy pouring rain, vibrant neon sign reflections reflecting off wet asphalt pavement, cyberpunk atmosphere"
+            daten["style"] = "cinematic action film photography, dramatic low-key lighting with high-saturation pink and teal accents, sharp focus with realistic motion blur elements"
+            daten["person_bits"] = ["wet hair strands flying dynamically in the wind, wearing a slick glossy black vinyl rain jacket, highly detailed water droplets on jacket texture"]
+            daten["pose"] = {
+                "haltung": "Gehend",
+                "raum": "Gehend durch den Raum",
+                "koerper": "Leicht zur Seite gedreht",
+                "arme": "Seitlich hängend",
+                "beine": "Leicht geöffnet",
+                "spannung": "Angespannt",
+            }
+        elif idx == 36:
+            daten["kamera"] = "Detail"
+            daten["fokus"] = "Augen"
+            daten["ausdruck"] = {"stimmung": "Intensiv"}
+            daten["scene"] = "ultra-close macro framing layout, blurred abstract dark studio background, minimalist lighting setup"
+            daten["style"] = "high-magnification commercial macro photography, extreme focal sharpness capturing hyper-detailed iris patterns, flawless realistic skin textures, zero filtering"
+            daten["person_bits"] = ["macro focus on stunning sharp eyes, detailed eyelashes, natural eyebrows, subtle hair strands framing the side of the temple"]
+            daten["pose"] = {
+                "haltung": "Stehend",
+                "raum": "Bildmitte",
+                "koerper": "Frontal zur Kamera",
+                "arme": "Eine Hand am Gesicht",
+                "beine": "Geschlossen",
+                "spannung": "Aufrecht",
+            }
+        elif idx == 37:
+            daten["kamera"] = "Totale"
+            daten["fokus"] = "Raum"
+            daten["ausdruck"] = {"stimmung": "Kühl"}
+            daten["scene"] = "high-fashion minimalist architectural interior, sitting on a glossy polished dark marble floor with geometric tile patterns running diagonally"
+            daten["style"] = "avant-garde editorial fashion photography, high camera angle pointing straight down, bird's-eye perspective, graphic compositional layout"
+            daten["person_bits"] = ["hair fanned out symmetrically on the floor behind the head, wearing a crisp oversized structural white designer blazer dress"]
+            daten["pose"] = {
+                "haltung": "Auf dem Boden sitzend",
+                "raum": "Bildmitte",
+                "koerper": "Frontal zur Kamera",
+                "arme": "Hinter sich abgestützt",
+                "beine": "Ausgestreckt",
+                "spannung": "Rücken durchgedrückt",
+            }
+        elif idx == 38:
+            daten["kamera"] = "Porträt"
+            daten["fokus"] = "Gesicht"
+            daten["ausdruck"] = {"stimmung": "Gelassen"}
+            daten["scene"] = "cozy warm interior coffee shop background, soft blurred plants, large industrial window pane positioned directly behind her"
+            daten["style"] = "warm filmic lifestyle portraiture, heavy golden-hour backlighting, soft volumetric god-rays creating a warm atmospheric glow, high dynamic range"
+            daten["person_bits"] = ["hair illuminated from behind creating a brilliant golden glowing rim-light effect along the silhouette, wearing a cozy oversized beige knit sweater"]
+            daten["pose"] = {
+                "haltung": "Auf einem Stuhl sitzend",
+                "raum": "Bildmitte",
+                "koerper": "Dreiviertelansicht",
+                "arme": "Hände auf den Knien",
+                "beine": "Geschlossen",
+                "spannung": "Entspannt",
+            }
+     
+    # =====================================================================
+    # BLOCK 9 (39-44): RUSTIC FINALE, DIVERSITY & SILHOUETTE ANCHORS
+    # =====================================================================
+    else:
+        if idx == 39:
+            daten["kamera"] = "Halbtotale"
+            daten["fokus"] = "Oberkörper"
+            daten["scene"] = "leaning back slightly against an old rustic oak wood table, a massive white window frame pane dominates the background landscape"
+            daten["style"] = "airy lifestyle portrait photography, bright ambient window daylight, clean minimalist room interior"
+            daten["person_bits"] = ["long hair falling straight behind the shoulders, wearing a clean white button-down long-sleeve oxford shirt, light blue denim shorts"]
+            daten["ausdruck"] = {"stimmung": "Gelassen"}
+            daten["pose"] = {
+                "haltung": "Angelehnt",
+                "raum": "Bildmitte",
+                "koerper": "Frontal zur Kamera",
+                "arme": "Vor der Brust verschränkt",
+                "beine": "Geschlossen",
+                "spannung": "Entspannt",
+            }
+        elif idx == 40:
+            daten["kamera"] = "Halbtotale"
+            daten["fokus"] = "Oberkörper"
+            daten["scene"] = "sitting directly perched on a white window sill pane, a dark rustic oak wood table surface is visible to her side"
+            daten["style"] = "cinematic interior lifestyle photography, soft directional side-lit window illumination, shallow depth of field bokeh"
+            daten["person_bits"] = ["hair loose and hanging naturally framing the posture geometry, wearing a white button-down long-sleeve shirt, denim shorts"]
+            daten["ausdruck"] = {"stimmung": "Nachdenklich"}
+            daten["pose"] = {
+                "haltung": "Auf einem Stuhl sitzend",
+                "raum": "An der Raumkante",
+                "koerper": "Dreiviertelansicht",
+                "arme": "Eine Hand am Gesicht",
+                "beine": "Übereinandergeschlagen",
+                "spannung": "Entspannt",
+            }
+        elif idx == 41:
+            daten["kamera"] = "Amerikanisch"
+            daten["fokus"] = "Taille"
+            daten["scene"] = "nighttime dark city street background, heavy pouring rain, vibrant neon sign reflections glaring off wet asphalt pavement"
+            daten["style"] = "cinematic action film photography, dramatic low-key lighting with high-saturation pink and teal accents, sharp focus, realistic motion blur"
+            daten["person_bits"] = ["wet hair strands flying dynamically in the wind, wearing a slick glossy black vinyl rain jacket with visible water droplets"]
+            daten["ausdruck"] = {"stimmung": "Neugierig"}
+            daten["pose"] = {
+                "haltung": "Gehend",
+                "raum": "Gehend durch den Raum",
+                "koerper": "Dreiviertelansicht",
+                "arme": "Seitlich hängend",
+                "beine": "Leicht geöffnet",
+                "spannung": "Angespannt",
+            }
+        elif idx == 42:
+            daten["kamera"] = "Amerikanisch"
+            daten["fokus"] = "Taille"
+            daten["scene"] = "standing outdoors in an expansive minimalist concrete brutalist architectural plaza, raw gray concrete walls in the background"
+            daten["style"] = "stark urban editorial fashion photography, direct overhead midday sunlight casting sharp shadows, crisp high dynamic range textures"
+            daten["person_bits"] = ["back view portrait, rear perspective looking at the subject from behind, hair bound neatly into a sleek long low ponytail trailing down the upper back, wearing a structured dark charcoal gray business blazer suit jacket seen from behind"]
+            daten["ausdruck"] = {"stimmung": "Stoisch"}
+            daten["pose"] = {
+                "haltung": "Stehend",
+                "raum": "Bildmitte",
+                "koerper": "Von hinten",
+                "arme": "Seitlich hängend",
+                "beine": "Leicht geöffnet",
+                "spannung": "Aufrecht",
+            }
+        elif idx == 43:
+            daten["kamera"] = "Detail"
+            daten["fokus"] = "Gesicht"
+            daten["scene"] = "isolated completely on a clean seamless pure white studio backdrop, bright wrap-around softbox illumination, shadowless"
+            daten["style"] = "extreme high-magnification commercial beauty portraiture, macro focal clarity, hyper-detailed skin textures, zero filtering"
+            daten["person_bits"] = ["bare shoulders, unclothed upper chest framing"]
+            daten["ausdruck"] = {"stimmung": "Selbstbewusst"}
+            daten["pose"] = {
+                "haltung": "Stehend",
+                "raum": "Bildmitte",
+                "koerper": "Frontal zur Kamera",
+                "arme": "Seitlich hängend",
+                "beine": "Geschlossen",
+                "spannung": "Aufrecht",
+            }
+        elif idx == 44:
+            daten["kamera"] = "Amerikanisch"
+            daten["fokus"] = "Taille"
+            daten["scene"] = "resting next to an old rustic oak wood table in front of a massive white window frame pane"
+            daten["style"] = "airy lifestyle portrait photography, soft directional ambient window daylight illuminating the subject, clean minimalist interior"
+            daten["person_bits"] = ["wearing a clean white button-down long-sleeve oxford shirt and light blue denim shorts"]
+            daten["ausdruck"] = {"stimmung": "Selbstbewusst"}
+            daten["pose"] = {
+                "haltung": "Stehend",
+                "raum": "Bildmitte",
+                "koerper": "Frontal zur Kamera",
+                "arme": "Seitlich hängend",
+                "beine": "Geschlossen",
+                "spannung": "Entspannt",
+            }
+
+    return daten
+
+
 def _schritt(platz):
     """This field's step size as a fraction of _NENNER.
 
@@ -456,20 +1176,24 @@ class Krea2Photoshooting:
                 # portrait with everything. Wiring the finished person string in
                 # here buys nothing: that one cannot be shortened.
                 "person_data": ("STRING", {"forceInput": True}),
+                "noise_seed": ("INT", {"forceInput": True}),
+                "lora_mode": ("BOOLEAN", {"default": False,
+                                          "label_on": "Lora", "label_off": "aus"}),
             },
             "hidden": {
                 "ShootingState": ("STRING", {"default": json.dumps(DEFAULT_STATE)}),
             },
         }
 
-    # person / person_data / kamera_label at the end: existing workflows keep
-    # wiring pose/ausdruck/kamera/width/height/bildseed at the same indices.
-    # person_data and kamera_label are there for optional packs that replace
-    # fields and re-compose at the same detail level.
+    # person / person_data / kamera_label / scene / style at the end: existing
+    # workflows keep wiring pose/ausdruck/kamera/width/height/bildseed at the
+    # same indices. person_data, kamera_label, scene and style are there for
+    # optional packs that replace fields or carry text without changing the main
+    # series outputs.
     RETURN_TYPES = ("STRING", "STRING", "STRING", "INT", "INT", "INT",
-                    "STRING", "STRING", "STRING")
+                    "STRING", "STRING", "STRING", "STRING", "STRING")
     RETURN_NAMES = ("pose", "ausdruck", "kamera", "width", "height", "bildseed",
-                    "person", "person_data", "kamera_label")
+                    "person", "person_data", "kamera_label", "scene", "style")
     FUNCTION = "shoot"
     CATEGORY = "Photoshoot"
     DESCRIPTION = ("Variiert Kamera, Pose, Mimik und Bildformat über eine ganze "
@@ -478,12 +1202,64 @@ class Krea2Photoshooting:
                    "Packs. Der Seed ist der Laufzähler, nicht die Zufallsquelle.")
 
     def shoot(self, seed=0, ShootingState=None, width_in=None, height_in=None,
-              person_data=None):
+              person_data=None, noise_seed=None, lora_mode=False):
         try:
             state = json.loads(ShootingState) if ShootingState else dict(DEFAULT_STATE)
         except (TypeError, ValueError):
             print("[Photoshoot] State unreadable, using defaults.")
             state = dict(DEFAULT_STATE)
+
+        if lora_mode:
+            idx = _lora_mode_index(seed)
+            preset = _lora_mode_plan(idx)
+            
+            # 1. Safely resolve your system's mapped dictionary strings
+            kamera_token = preset.get("kamera", "Porträt")
+            fokus_token = preset.get("fokus", "Gesicht")
+            
+            # Pull raw tracking text from your system arrays using generator iteration loops
+            raw_kamera_text = next((val for key, val in KAMERA if key == kamera_token), "portrait shot, head and shoulders")
+            raw_fokus_text = next((val for key, val in FOKUS if key == fokus_token), "with the focus on the face")
+            
+            plan = {
+                "kamera": raw_kamera_text,
+                "fokus": raw_fokus_text,
+                "pose": preset.get("pose", {}),
+                "ausdruck": preset.get("ausdruck", {}),
+            }
+            
+            pose = PB.compose_pose(plan["pose"], "")
+            ausdruck = EB.compose_expression(plan["ausdruck"], "")
+            
+            # 2. Build camera and lighting track layout strings cleanly
+            kamera = plan["kamera"]
+            if plan["fokus"]:
+                kamera = f"{kamera}, {plan['fokus']}" if kamera else plan["fokus"]
+
+            style = preset.get("style") or ""
+            if style:
+                kamera = f"{kamera}, {style}" if kamera else style
+
+            scene = preset.get("scene") or ""
+
+            # 3. Apply the custom camera-distance person layout helper method
+            person = _person_fuer_kamera(person_data, plan["kamera"], plan.get("fokus"))
+
+            bits = []
+            for teil in preset.get("person_bits") or []:
+                if teil and teil not in bits:
+                    bits.append(teil)
+            if bits:
+                person = person + (", " + ", ".join(bits) if person else ", ".join(bits))
+
+            # Keep manual custom width and height parameters locked completely
+            w, h = masse(plan["kamera"], seed, state)
+
+            final_run_seed = int(noise_seed) if noise_seed is not None else 0
+
+            return (pose, ausdruck, kamera, w, h, final_run_seed,
+                    person, (person_data if isinstance(person_data, str) else json.dumps(person_data, ensure_ascii=False) if person_data else ""),
+                    plan["kamera"], scene, style)
 
         plan = plane(state, seed)
         detail = PeB.detail_fuer_kamera(plan["kamera"])
@@ -509,10 +1285,13 @@ class Krea2Photoshooting:
                 kamera = fokus
 
         person = _person_fuer_kamera(person_data, plan["kamera"], plan.get("fokus"))
+        scene = PB.compose_scene(plan["pose"])
+        style = ""
 
         # Pass the raw data through unchanged - a pack downstream can replace
         # fields and re-compose, using kamera_label for the same detail level as
-        # here.
+        # here. scene and style stay plain text for optional downstream use and
+        # are not wired into prompt assembly yet.
         if person_data is None or person_data == "":
             pd_out = ""
         elif isinstance(person_data, str):
@@ -528,9 +1307,14 @@ class Krea2Photoshooting:
             w, h = int(width_in), int(height_in)
         else:
             w, h = masse(plan["kamera"], seed, state)
+            
+        if noise_seed is not None:
+            final_run_seed = int(noise_seed)
+        else:
+            final_run_seed = bildseed(seed, state)
 
-        return (pose, ausdruck, kamera, w, h, bildseed(seed, state),
-                person, pd_out, kamera_label)
+        return (pose, ausdruck, kamera, w, h, final_run_seed,
+                person, pd_out, kamera_label, scene, style)
 
 
 NODE_CLASS_MAPPINGS = {"Krea2Photoshooting": Krea2Photoshooting}

@@ -84,6 +84,7 @@ PRESETS = {
         ("Vor der Brust verschränkt", "arms crossed in front of the chest"),
         ("Seitlich hängend", "arms hanging relaxed at the sides"),
         ("Hände auf den Hüften", "hands on the hips"),
+        ("Hände in den Hosentaschen", "hands in the pockets"),
         ("Hände im Schoß", "hands resting in the lap"),
         ("Hände auf den Knien", "hands resting on the knees"),
         ("Hinter sich abgestützt", "hands propped on the surface behind"),
@@ -199,7 +200,8 @@ HALTUNG_SPANNUNG = {
 _AR_STEHEND = ["Hinter dem Rücken", "Hinter dem Rücken, Handgelenke gekreuzt",
                "Hinter dem Kopf", "Über dem Kopf gestreckt",
                "Vor der Brust verschränkt", "Seitlich hängend",
-               "Hände auf den Hüften", "Eine Hand am Gesicht", "Eine Hand im Haar"]
+               "Hände auf den Hüften", "Hände in den Hosentaschen",
+               "Eine Hand am Gesicht", "Eine Hand im Haar"]
 _AR_VORGEBEUGT = ["Hinter dem Rücken", "Vor der Brust verschränkt", "Seitlich hängend",
                   "Hände auf den Hüften", "Hände auf den Knien",
                   "Eine Hand am Gesicht", "Eine Hand im Haar"]
@@ -349,6 +351,12 @@ def compose_pose(werte, details=""):
     if frei:
         teile.append(frei)
     return ", ".join(teile)
+
+
+def compose_scene(werte):
+    """Return the room placement as a standalone scene string."""
+    raum = werte.get("raum") if isinstance(werte, dict) else None
+    return raum if raum else ""
 
 
 class Krea2PoseBuilder:
