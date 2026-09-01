@@ -88,7 +88,7 @@ PRESETS = {
         ("Hände in den Hosentaschen", "hands in the pockets"),
         ("Hände im Schoss", "hands resting in the lap"),
         ("Hände auf den Knien", "hands resting on the knees"),
-        ("Eine Hand hält eine Kaffeetasse", "one hand holding a coffee cup"),
+        ("Hände auf dem Tisch", "hands resting on the table"),
         ("Hinter sich abgestützt", "hands propped on the surface behind"),
         ("Auf die Unterarme gestützt", "leaning on the forearms"),
         ("Eine Hand am Gesicht", "one hand touching the face"),

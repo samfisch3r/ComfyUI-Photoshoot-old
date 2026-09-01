@@ -227,7 +227,7 @@ def _lora_mode_plan(seed=0):
         "pose": {},
         "ausdruck": {},
         "scene": "isolated on a seamless pure white backdrop, professional studio lighting, shadowless, clean minimalist background",
-        "style": "professional studio photography, high-end commercial fashion portfolio, crisp sharp details, 85mm lens",
+        "style": "professional studio photography, high-end commercial fashion portfolio, crisp sharp details, 85mm lens, ultra-sharp skin pore texture macro detailing, natural skin imperfections, crisp lens focus",
         "person_bits": [],
     }
 
@@ -237,59 +237,52 @@ def _lora_mode_plan(seed=0):
     if 0 <= idx <= 3:
         if idx == 0:
             daten["fokus"] = "Gesicht"
-            daten["scene"] = "isolated on a seamless pure white backdrop, professional studio lighting configuration, clean setup"
+            daten["scene"] = "isolated on a seamless pure white backdrop, perfectly even high-key beauty studio illumination, soft uniform ambient wash"
             daten["pose"] = {
                 "haltung": "standing",
                 "raum": "the subject centered in the middle ground",
                 "koerper": "facing the camera directly",
-                "beine": "legs closed together",
                 "spannung": "with an upright posture",
             }
         elif idx == 1:
-            daten["kamera"] = "Detail"
-            daten["fokus"] = "Augen"
+            daten["kamera"] = "Nahaufnahme"
+            daten["fokus"] = "Gesicht"
             daten["ausdruck"] = {"stimmung": "Sanftes Lächeln"}
-            daten["scene"] = "set against a pristine solid white studio backdrop, bright wrapping softbox panel illumination"
-            daten["style"] = "premium editorial fashion headshot portraiture, sharp focal clarity, clean diffuse studio light pass"
+            daten["scene"] = "set against a pristine solid white studio backdrop, shadowless flat lighting matrix, bright front-facing softbox panel exposure"
+            daten["style"] = "premium editorial portraiture, manicured fingers touching her cheek, macro lens compression, close studio perspective, ultra-sharp skin pore texture macro detailing, natural skin imperfections, crisp lens focus"
             daten["pose"] = {
                 "haltung": "Stehend",
-                "raum": "Bildmitte",
-                "koerper": "Leicht zur Seite gedreht",
+                "koerper": "Frontal zur Kamera",
                 "arme": "Eine Hand am Gesicht",
-                "beine": "Leicht geöffnet",
                 "spannung": "Entspannt",
             }
         elif idx == 2:
             daten["kamera"] = "Porträt"
             daten["fokus"] = "Gesicht"
             daten["ausdruck"] = {"stimmung": "Ernst"}
-            daten["scene"] = "positioned on a seamless minimalist white backdrop, high-end commercial flash setup, shadowless"
-            daten["style"] = "commercial beauty portfolio photography, crisp high-end textures, flawless zero-shadow rendering"
+            daten["scene"] = "positioned on a seamless minimalist white backdrop, soft omnidirectional beauty-dish distribution, completely balanced fill lighting"
+            daten["style"] = "commercial beauty portfolio photography, wrapped vanity lightning scheme, zero drop-shadow contrast, professional high-end catalog look, ultra-sharp skin pore texture macro detailing, natural skin imperfections, crisp lens focus"
             daten["pose"] = {
                 "haltung": "Stehend",
                 "raum": "Vordergrund",
                 "koerper": "Dreiviertelansicht",
                 "arme": "Hände auf den Hüften",
-                "beine": "Leicht geöffnet",
                 "spannung": "Schultern zurück",
             }
         elif idx == 3:
             daten["kamera"] = "Nahaufnahme"
             daten["fokus"] = "Augen"
             daten["ausdruck"] = {"stimmung": "Konzentriert"}
-            daten["scene"] = "isolated on a clean uniform pure white backdrop, perfectly calibrated studio key lights"
-            daten["style"] = "magazine headshot studio portfolio, crisp sharp optical separation, clean commercial beauty setup"
+            daten["scene"] = "isolated on a clean uniform pure white backdrop, perfectly calibrated diffuse front-facing scrim setup"
+            daten["style"] = "magazine headshot studio portfolio, low-contrast macro lens compression, clean commercial capture configuration, soft focal depth transitions, ultra-sharp skin pore texture macro detailing, natural skin imperfections, crisp lens focus"
             daten["pose"] = {
                 "haltung": "Stehend",
-                "raum": "Bildmitte",
                 "koerper": "Dreiviertelansicht",
-                "arme": "Hände auf den Hüften",
-                "beine": "Geschlossen",
                 "spannung": "Aufrecht",
             }
 
-    # =====================================================================
-    # BLOCK 2 (04-08): WHITE STUDIO - PROFILE ANCHORS
+     # =====================================================================
+    # BLOCK 2 (04-08): WHITE STUDIO - PROFILE ANCHORS (DIVERSIFIED)
     # =====================================================================
     elif 4 <= idx <= 8:
         daten["fokus"] = "Gesicht"
@@ -298,49 +291,47 @@ def _lora_mode_plan(seed=0):
             daten["ausdruck"] = {"stimmung": "Stoisch"}
             daten["pose"] = {
                 "haltung": "Stehend",
-                "raum": "Am Fenster",
                 "koerper": "Im Profil",
                 "arme": "Vor der Brust verschränkt",
-                "beine": "Geschlossen",
                 "spannung": "Aufrecht",
             }
-            daten["scene"] = "isolated on a seamless pure white backdrop, left side profile viewpoint orientation, clean studio layout"
+            daten["scene"] = "extreme crisp side profile silhouette portrait, completely isolated on a seamless pure white backdrop, professional studio lighting"
+            daten["style"] = "sharp left profile headshot photography, stark side view angle, single profile eye visible, zero drop shadows"
         elif idx == 5:
             daten["kamera"] = "Porträt"
             daten["ausdruck"] = {"stimmung": "Gelassen"}
             daten["pose"] = {
                 "haltung": "Stehend",
-                "raum": "Bildmitte",
-                "koerper": "Im Profil",
+                "raum": "An der Raumkante",
+                "koerper": "Über die Schulter gedreht",
                 "arme": "Eine Hand am Gesicht",
-                "beine": "Leicht geöffnet",
                 "spannung": "Entspannt",
             }
-            daten["scene"] = "set against a pristine white studio backdrop, left profile angle showing the right side of her face"
+            daten["scene"] = "set against a pristine white studio backdrop, dramatic off-center composition layout"
+            daten["style"] = "commercial beauty photography, softbox uniform illumination with subtle catchlights, clean contrast"
         elif idx == 6:
             daten["kamera"] = "Nahaufnahme"
             daten["ausdruck"] = {"stimmung": "Ernst"}
             daten["pose"] = {
                 "haltung": "Stehend",
-                "raum": "Am Fenster",
                 "koerper": "Im Profil",
                 "arme": "Seitlich hängend",
-                "beine": "Geschlossen",
                 "spannung": "Schultern zurück",
             }
-            daten["scene"] = "isolated on a seamless pure white backdrop, right side profile viewpoint orientation, sharp setup"
+            daten["scene"] = "extreme crisp right side profile silhouette portrait, completely isolated on a seamless pure white backdrop, professional studio lighting"
+            daten["style"] = "sharp right profile headshot photography, stark side view angle, single profile eye visible, zero drop shadows"
         elif idx == 7:
             daten["kamera"] = "Porträt"
             daten["ausdruck"] = {"stimmung": "Entspannt"}
             daten["pose"] = {
                 "haltung": "Stehend",
-                "raum": "Bildmitte",
-                "koerper": "Im Profil",
+                "raum": "Vordergrund",
+                "koerper": "Dreiviertelansicht",
                 "arme": "Hände auf den Hüften",
-                "beine": "Leicht geöffnet",
                 "spannung": "Entspannt",
             }
-            daten["scene"] = "set against a clean uniform white backdrop, elegant profile angled viewpoint tracking configuration"
+            daten["scene"] = "set against a clean uniform white backdrop, dynamic three-quarter view framing setup, wrapped multi-light diffuser configuration"
+            daten["style"] = "high-end high-key portrait studio series, luminous ambient background fill matrix, soft lighting edges, professional modeling portfolio look"
         elif idx == 8:
             daten["kamera"] = "Halbtotale"
             daten["fokus"] = "Oberkörper"
@@ -353,14 +344,16 @@ def _lora_mode_plan(seed=0):
                 "beine": "Übereinandergeschlagen",
                 "spannung": "Entspannt",
             }
-            daten["scene"] = "isolated on a seamless pure white backdrop, clean upper body mid-shot framing setup, studio illumination"
+            daten["scene"] = "isolated on a seamless pure white backdrop, full mid-shot waist-up seated posture framing configuration, wrapping ambient beauty dish array"
+            daten["style"] = "clean commercial fashion catalog layout, flat high-key environment matrix, crisp outline separation, minimal shadow depths, 50mm look"
 
     # =====================================================================
     # BLOCK 3 (09-13): WHITE STUDIO - POSTURE & BODY ANCHORS
     # =====================================================================
     elif 9 <= idx <= 13:
-        daten["scene"] = "isolated on a seamless pure white backdrop, professional studio lighting, shadowless, clean minimalist background"
-        daten["style"] = "professional studio photography, high-end commercial fashion portfolio, crisp sharp details, 85mm lens"
+        daten["scene"] = "isolated on a seamless pure white backdrop, perfectly even high-key studio illumination, soft uniform ambient wash"
+        daten["style"] = "professional studio photography, clean zero-contrast diffuse lighting pass, soft light wrap, 85mm lens look"
+        
         if idx == 9:
             daten["kamera"] = "Halbtotale"
             daten["fokus"] = "Oberkörper"
@@ -368,8 +361,8 @@ def _lora_mode_plan(seed=0):
             daten["pose"] = {
                 "haltung": "Auf einem Hocker sitzend",
                 "raum": "Bildmitte",
-                "koerper": "Frontal zur Kamera",
-                "arme": "Hände auf den Knien",
+                "koerper": "Dreiviertelansicht", 
+                "arme": "Vor der Brust verschränkt", 
                 "beine": "Geschlossen",
                 "spannung": "Entspannt",
             }
@@ -381,10 +374,11 @@ def _lora_mode_plan(seed=0):
                 "haltung": "Stehend",
                 "raum": "Bildmitte",
                 "koerper": "Leicht zur Seite gedreht",
-                "arme": "Eine Hand am Gesicht",
+                "arme": "Seitlich hängend",
                 "beine": "Leicht geöffnet",
                 "spannung": "Schultern zurück",
             }
+            daten["scene"] = "isolated on a seamless pure white backdrop, professional high-key studio lighting matrix, shadowless environment"
         elif idx == 11:
             daten["kamera"] = "Halbtotale"
             daten["fokus"] = "Oberkörper"
@@ -393,10 +387,11 @@ def _lora_mode_plan(seed=0):
                 "haltung": "Sitzend",
                 "raum": "Bildmitte",
                 "koerper": "Frontal zur Kamera",
-                "arme": "Hände auf den Knien",
+                "arme": "Eine Hand am Gesicht",
                 "beine": "Übereinandergeschlagen",
                 "spannung": "Entspannt",
             }
+            daten["style"] = "commercial beauty portraiture, wrapped vanity lighting scheme, zero drop-shadow contrast"
         elif idx == 12:
             daten["kamera"] = "Amerikanisch"
             daten["fokus"] = "Taille"
@@ -414,13 +409,14 @@ def _lora_mode_plan(seed=0):
             daten["fokus"] = "Ganze Figur"
             daten["ausdruck"] = {"stimmung": "Selbstbewusst"}
             daten["pose"] = {
-                "haltung": "Auf dem Boden sitzend",
+                "haltung": "Auf einer Tischkante sitzend",
                 "raum": "Bildmitte",
                 "koerper": "Frontal zur Kamera",
-                "arme": "Hinter sich abgestützt",
-                "beine": "Ausgestreckt",
-                "spannung": "Rücken durchgedrückt",
+                "arme": "Hinter dem Kopf",
+                "beine": "Weit gespreizt",
+                "spannung": "Aufrecht",
             }
+            daten["scene"] = "perched on the edge of a minimalist clean white studio posing table, seamless solid white studio environment background"
                
     # =====================================================================
     # BLOCK 4 (14-18): ORGANIC NATURE - ENVIRONMENT CONTEXT BREAKERS
@@ -448,13 +444,12 @@ def _lora_mode_plan(seed=0):
             daten["ausdruck"] = {"stimmung": "Entspannt"}
             daten["scene"] = "positioned in a dense forest clearing, surrounded by massive tall evergreen trees and wild ferns"
             daten["style"] = "vibrant outdoor editorial portraiture, soft diffused morning daylight, crisp sharp leaf detail textures"
-            daten["person_bits"] = ["wearing a classic plain gray short-sleeve cotton t-shirt with slight shadows on the chest"]
+            daten["person_bits"] = ["wearing a classic plain gray short-sleeve thin cotton t-shirt"]
             daten["pose"] = {
                 "haltung": "Angelehnt",
                 "raum": "Am Fenster",
                 "koerper": "Dreiviertelansicht",
                 "arme": "Eine Hand am Gesicht",
-                "beine": "Leicht geöffnet",
                 "spannung": "Entspannt",
             }
             
@@ -475,18 +470,16 @@ def _lora_mode_plan(seed=0):
             }
             
         elif idx == 17:
-            daten["kamera"] = "Nahaufnahme"
-            daten["fokus"] = "Augen"
+            daten["kamera"] = "Halbtotale"
+            daten["fokus"] = "Oberkörper"
             daten["ausdruck"] = {"stimmung": "Verträumt"}
             daten["scene"] = "low-angle perspective in a dense forest environment, thick forest floor covered in green moss"
             daten["style"] = "high-end commercial outdoor capture, crisp environmental depth of field, sharp background bokeh circles"
             daten["person_bits"] = ["wearing a simple soft gray knit cotton t-shirt with natural creases along the waist"]
             daten["pose"] = {
                 "haltung": "Hockend",
-                "raum": "Bildmitte",
                 "koerper": "Frontal zur Kamera",
                 "arme": "Arme umschlingen die Knie",
-                "beine": "Angewinkelt",
                 "spannung": "Zusammengekauert",
             }
             
@@ -501,7 +494,7 @@ def _lora_mode_plan(seed=0):
                 "haltung": "Auf dem Boden sitzend",
                 "raum": "Bildmitte",
                 "koerper": "Frontal zur Kamera",
-                "arme": "Hände im Schoss",
+                "arme": "Hände auf den Knien",
                 "beine": "Übereinandergeschlagen",
                 "spannung": "Entspannt",
             }
@@ -535,10 +528,8 @@ def _lora_mode_plan(seed=0):
             daten["person_bits"] = ["wearing a premium thick leather jacket with metallic zippers and dual collar snaps, open front design"]
             daten["pose"] = {
                 "haltung": "Stehend",
-                "raum": "Bildmitte",
                 "koerper": "Frontal zur Kamera",
                 "arme": "Vor der Brust verschränkt",
-                "beine": "Geschlossen",
                 "spannung": "Schultern zurück",
             }
             
@@ -579,14 +570,12 @@ def _lora_mode_plan(seed=0):
             daten["fokus"] = "Gesicht"
             daten["ausdruck"] = {"stimmung": "Angespannt"}
             daten["scene"] = "under a dark industrial scaffolding overhang on a city sidewalk, intense pink and purple neon signs reflecting on the wet ground"
-            daten["style"] = "avant-garde street photography, high-intensity color saturation, brilliant reflection detailing, anamorphic lens flares"
+            daten["style"] = "avant-garde street photography, high-intensity color saturation, brilliant reflection detailing, clean cinematic color grading, moody shadows"
             daten["person_bits"] = ["wearing a sharp modern leather motorcycle jacket with sleek lapels and buttoned wrist cuff adjustments"]
             daten["pose"] = {
                 "haltung": "Stehend",
-                "raum": "Bildmitte",
                 "koerper": "Leicht zur Seite gedreht",
                 "arme": "Eine Hand am Gesicht",
-                "beine": "Leicht geöffnet",
                 "spannung": "Angespannt",
             }
 
@@ -619,10 +608,8 @@ def _lora_mode_plan(seed=0):
             daten["person_bits"] = ["hair styled into a neat high bun exposing the bare shoulders, wearing a minimalist camisole with thin straps"]
             daten["pose"] = {
                 "haltung": "Sitzend",
-                "raum": "Bildmitte",
                 "koerper": "Im Profil",
                 "arme": "Hände auf den Knien",
-                "beine": "Übereinandergeschlagen",
                 "spannung": "Entspannt",
             }
             
@@ -635,10 +622,8 @@ def _lora_mode_plan(seed=0):
             daten["person_bits"] = ["hair pulled up tightly into a sleek top knot bun, wearing a plain everyday spaghetti strap top"]
             daten["pose"] = {
                 "haltung": "Auf einem Knie",
-                "raum": "Bildmitte",
                 "koerper": "Dreiviertelansicht",
                 "arme": "Hände auf den Knien",
-                "beine": "Ein Knie angewinkelt",
                 "spannung": "Entspannt",
             }
             
@@ -647,7 +632,7 @@ def _lora_mode_plan(seed=0):
             daten["fokus"] = "Rücken"
             daten["ausdruck"] = {"stimmung": "Grüblerisch"}
             daten["scene"] = "in a dark minimalist den environment, a single active fireplace casting long deep shadows"
-            daten["style"] = "moody artistic portfolio capture, extreme directional lighting scheme, dramatic drop-shadows, high contrast"
+            daten["style"] = "moody artistic portfolio capture, warm flickering amber and deep orange firelight glow illuminating skin, low warm key"
             daten["person_bits"] = ["hair bound neatly into a clean tight high bun layout, wearing a lightweight strappy top with soft fabric creases"]
             daten["pose"] = {
                 "haltung": "Auf einem Stuhl sitzend",
@@ -667,10 +652,8 @@ def _lora_mode_plan(seed=0):
             daten["person_bits"] = ["hair securely styled up into a flawless high bun revealing the neckline, wearing a simple tank top with delicate shoulder straps"]
             daten["pose"] = {
                 "haltung": "Zurückgelehnt",
-                "raum": "Bildmitte",
                 "koerper": "Frontal zur Kamera",
                 "arme": "Hände im Schoss",
-                "beine": "Ausgestreckt",
                 "spannung": "Entspannt",
             }
 
@@ -678,7 +661,7 @@ def _lora_mode_plan(seed=0):
     # BLOCK 7 (29-31): BRUTALIST PLAZA - OVERHEAD HARSH LIGHT BREAKERS
     # =====================================================================
     elif 29 <= idx <= 31:
-        daten["style"] = "stark high-dynamic-range architectural photography, harsh overhead midday sunlight casting sharp deep black geometric shadows, high contrast"
+        daten["style"] = "stark high-dynamic-range architectural photography, beauty dish key light with crisp catchlights in the eyes, balanced ambient fill light"
         daten["person_bits"] = ["hair pulled back tightly into a sleek long low ponytail, clear view of facial frame anatomy, wearing a crisp tailored dark charcoal gray business blazer suit"]
         if idx == 29:
             daten["kamera"] = "Ganzkörper"
@@ -690,7 +673,7 @@ def _lora_mode_plan(seed=0):
                 "koerper": "Frontal zur Kamera",
                 "arme": "Vor der Brust verschränkt",
                 "beine": "Leicht geöffnet",
-                "spannung": "Aufrecht",
+                "spannung": "Schultern zurück",
             }
             daten["scene"] = "in an expansive minimalist concrete brutalist architectural plaza courtyard, large surrounding gray concrete stone pavement, sharp stairs visible in background"
         elif idx == 30:
@@ -735,10 +718,8 @@ def _lora_mode_plan(seed=0):
             daten["person_bits"] = ["wearing a thick high-neck olive green wool knit turtleneck sweater, hair falling naturally down and tucked behind the shoulders"]
             daten["pose"] = {
                 "haltung": "Stehend",
-                "raum": "Bildmitte",
                 "koerper": "Frontal zur Kamera",
                 "arme": "Seitlich hängend",
-                "beine": "Geschlossen",
                 "spannung": "Entspannt",
             }
         elif idx == 33:
@@ -750,15 +731,13 @@ def _lora_mode_plan(seed=0):
             daten["person_bits"] = ["wearing a thick high-neck olive green wool knit turtleneck sweater, long hair layout draped forward over both shoulders in front"]
             daten["pose"] = {
                 "haltung": "Stehend",
-                "raum": "Bildmitte",
                 "koerper": "Frontal zur Kamera",
                 "arme": "Hände auf den Hüften",
-                "beine": "Leicht geöffnet",
                 "spannung": "Schultern zurück",
             }
         elif idx == 34:
             daten["kamera"] = "Halbtotale"
-            daten["fokus"] = "Oberkörper"
+            daten["fokus"] = "Gesicht"
             daten["ausdruck"] = {"stimmung": "Entspannt"}
             daten["scene"] = "indoors, beside a rustic distressed dark wooden table, clean white interior room walls, large windows in soft-focus background letting in bright natural daylight"
             daten["style"] = "natural modern lifestyle photography, bright open exposure, shallow depth of field bokeh, organic warm atmosphere"
@@ -795,10 +774,8 @@ def _lora_mode_plan(seed=0):
             daten["person_bits"] = ["macro focus on stunning sharp eyes, detailed eyelashes, natural eyebrows, subtle hair strands framing the side of the temple"]
             daten["pose"] = {
                 "haltung": "Stehend",
-                "raum": "Bildmitte",
                 "koerper": "Frontal zur Kamera",
                 "arme": "Eine Hand am Gesicht",
-                "beine": "Geschlossen",
                 "spannung": "Aufrecht",
             }
         elif idx == 37:
@@ -825,10 +802,8 @@ def _lora_mode_plan(seed=0):
             daten["person_bits"] = ["hair illuminated from behind creating a brilliant golden glowing rim-light effect along the silhouette, wearing a cozy oversized beige knit sweater"]
             daten["pose"] = {
                 "haltung": "Auf einem Stuhl sitzend",
-                "raum": "Bildmitte",
                 "koerper": "Dreiviertelansicht",
                 "arme": "Hände auf den Knien",
-                "beine": "Geschlossen",
                 "spannung": "Entspannt",
             }
      
@@ -852,8 +827,8 @@ def _lora_mode_plan(seed=0):
                 "spannung": "Entspannt",
             }
         elif idx == 40:
-            daten["kamera"] = "Halbtotale"
-            daten["fokus"] = "Oberkörper"
+            daten["kamera"] = "Amerikanisch"
+            daten["fokus"] = "Gesicht"
             daten["scene"] = "a dark rustic oak wood table surface is visible to her side"
             daten["style"] = "cinematic interior lifestyle photography, soft directional side-lit window illumination, shallow depth of field bokeh"
             daten["person_bits"] = ["hair loose and hanging naturally framing the posture geometry, wearing a white button-down long-sleeve shirt, denim shorts"]
@@ -882,8 +857,8 @@ def _lora_mode_plan(seed=0):
                 "spannung": "Angespannt",
             }
         elif idx == 42:
-            daten["kamera"] = "Amerikanisch"
-            daten["fokus"] = "Taille"
+            daten["kamera"] = "Porträt"
+            daten["fokus"] = "Rücken"
             daten["scene"] = "outdoors in an expansive minimalist concrete brutalist architectural plaza, raw gray concrete walls in the background"
             daten["style"] = "stark urban editorial fashion photography, direct overhead midday sunlight casting sharp shadows, crisp high dynamic range textures"
             daten["person_bits"] = ["back view portrait, rear perspective looking at the subject from behind, hair bound neatly into a sleek long low ponytail trailing down the upper back, wearing a structured dark charcoal gray business blazer suit jacket seen from behind"]
@@ -897,17 +872,17 @@ def _lora_mode_plan(seed=0):
                 "spannung": "Aufrecht",
             }
         elif idx == 43:
-            daten["kamera"] = "Halbtotale"
+            daten["kamera"] = "Amerikanisch"
             daten["fokus"] = "Oberkörper"
-            daten["scene"] = "casual cafe interior, seated at a warm wooden table with a ceramic coffee cup, soft daylight through the windows, relaxed everyday atmosphere"
-            daten["style"] = "natural candid lifestyle photography, warm indoor daylight, shallow depth of field, authentic slice-of-life character reference"
-            daten["person_bits"] = ["looking slightly off-camera with a relaxed natural expression"]
+            daten["scene"] = "warm cozy cafe interior with soft ambient window daylight, seated at a rustic wooden table with blurred cafe background"
+            daten["style"] = "warm intimate lifestyle portraiture, soft golden-hour window backlighting, gentle fill light creating depth and dimension, rich organic texture"
+            daten["person_bits"] = ["wearing a soft cream-colored linen long-sleeve shirt, hair falling naturally framing the shoulders"]
             daten["ausdruck"] = {"stimmung": "Gelassen"}
             daten["pose"] = {
                 "haltung": "Sitzend",
                 "raum": "Bildmitte",
                 "koerper": "Dreiviertelansicht",
-                "arme": "Eine Hand hält eine Kaffeetasse",
+                "arme": "Hände auf dem Tisch",
                 "beine": "Übereinandergeschlagen",
                 "spannung": "Entspannt",
             }
@@ -1123,6 +1098,13 @@ def _ausdruck_fuer_koerper(werte, koerper_label):
         stimmung = None
     return {cat: (stimmung if cat == "stimmung" else None) for cat in EB.FOLGE}
 
+def _ausdruck_fuer_profil(werte, koerper_label):
+    """Drops distracting facial details when the subject is in profile."""
+    if koerper_label != "Im Profil":
+        return werte
+    # Strip features that force both sides of the face to render
+    strip_keys = {"eyeShape", "eyeliner", "eyeshadow", "cheekbones", "blush"}
+    return {cat: (werte.get(cat) if cat not in strip_keys else None) for cat in EB.FOLGE}
 
 KAMERA_DETAIL_FOKUS = {
     "Füsse": "extreme close-up macro shot of feet and shoes, low angle floor-level perspective, camera focused tightly on the footwear and ankles",
@@ -1270,6 +1252,7 @@ class Krea2Photoshooting:
         ausdruck_werte = _ausdruck_fuer_detail(ausdruck_werte, detail)
         ausdruck_werte = _ausdruck_fuer_koerper(ausdruck_werte,
                                                 plan["pose"].get("koerper"))
+        ausdruck_werte = _ausdruck_fuer_profil(ausdruck_werte, plan["pose"].get("koerper"))
 
         pose = PB.compose_pose(pose_werte, "")
         ausdruck = EB.compose_expression(ausdruck_werte, "")
