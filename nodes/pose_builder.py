@@ -77,8 +77,7 @@ PRESETS = {
     "arme": [
         # The case it hinges on - deliberately spelled out twice over.
         ("Hinter dem Rücken", "both arms held behind the back, hands clasped together"),
-        ("Hinter dem Rücken, Handgelenke gekreuzt",
-         "both arms behind the back with the wrists crossed"),
+        ("Hinter dem Rücken, Handgelenke gekreuzt", "both arms behind the back with the wrists crossed"),
         ("Hinter dem Kopf", "both arms raised behind the head"),
         ("Über dem Kopf gestreckt", "both arms stretched above the head"),
         ("Vor der Brust verschränkt", "arms crossed in front of the chest"),
@@ -86,6 +85,7 @@ PRESETS = {
         ("Natürliche Bewegung beim Gehen", "natural arm movement while walking"),
         ("Hände auf den Hüften", "hands on the hips"),
         ("Hände in den Hosentaschen", "hands in the pockets"),
+        ("Hände auf den Oberschenkeln", "hands on the thighs"),
         ("Hände im Schoss", "hands resting in the lap"),
         ("Hände auf den Knien", "hands resting on the knees"),
         ("Hände auf dem Tisch", "hands resting on the table"),

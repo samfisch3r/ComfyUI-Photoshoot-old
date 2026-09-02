@@ -188,36 +188,47 @@ function wuerflePersona(daten, stateAktuell) {
   };
 
   // 1. Gender
-  const genPool = ["Frau", "Frau", "Frau", "Mann", "Mann", "Transfrau", "Person"];
-  const gender = _zufall(genPool);
+  const gender = "Frau";
   f.gender = valid("gender", gender);
 
   // 2. Age (20s to 50s)
   const agePool = [
     "Anfang 20", "Mitte 20", "Ende 20", "Anfang 30", "Mitte 30", "Ende 30", "40er", "50er"
   ];
-  f.age = valid("age", _zufall(agePool));
+  const age = _zufall(agePool);
+  f.age = valid("age", age);
+  const ageRanges = {
+    "Anfang 20": [20, 21, 22, 23],
+    "Mitte 20": [24, 25, 26],
+    "Ende 20": [27, 28, 29],
+    "Anfang 30": [30, 31, 32, 33],
+    "Mitte 30": [34, 35, 36],
+    "Ende 30": [37, 38, 39],
+    "40er": Array.from({ length: 10 }, (_, i) => 40 + i),
+    "50er": Array.from({ length: 10 }, (_, i) => 50 + i),
+  };
+  t.ageExact = String(_zufall(ageRanges[age]));
 
   // 3. Coherent Ethnicity Archetypes
   const archetypes = [
     {
       ethnicity: "Skandinavisch",
-      skinTone: ["Sehr hell", "Hell", "Kühles Porzellan"],
-      complexion: ["Natürliche Poren", "Zarter Glanz", "Frisch & taufrisch"],
-      hairColor: ["Honigblond", "Platinblond", "Aschblond", "Rot / Kupfer", "Hellbraun"],
-      eyes: ["Eisblau", "Helles Blau", "Graugrün", "Klares Grün", "Graublau"],
-      hairF: ["Lange Wellen", "Beach Waves", "Lange glatte Haare", "Curtain Bangs", "Messy Bun"],
-      hairM: ["Mittellang strukturiert", "Klassischer Seitenscheitel", "Kurzer Fade Cut"],
+      skinTone: ["Sehr hell", "Hell"],
+      complexion: ["Porzellan", "Natürliche Poren", "Dewy", "Blass"],
+      hairColor: ["Blond", "Platinblond", "Dunkelblond", "Dreckig Blond", "Hellbraun", "Braun", "Rot / Kupfer", "Erdbeerblond", "Grau / Silber"],
+      eyes: ["Eisblau", "Blau", "Graugrün", "Grün", "Graublau", "Grau", "Haselnuss", "Braun"],
+      hairF: ["Lange Wellen", "Lang glatt", "Curtain Bangs", "Messy Bun", "Pony", "Pixie", "Flechtzopf", "Half-up", "Space Buns"],
+      hairM: ["Klassischer Seitenscheitel", "Kurzer Fade Cut"],
       features: ["Sommersprossen"],
       featuresChance: 0.35,
     },
     {
       ethnicity: "Mediterran",
-      skinTone: ["Hell gebräunt", "Gebräunt", "Oliv"],
-      complexion: ["Natürliche Poren", "Zarter Glanz", "Satin Finish"],
-      hairColor: ["Warmes Schokobraun", "Dunkelbraun", "Schwarzbraun", "Kastanienbraun"],
-      eyes: ["Warmes Braun", "Dunkelbraun", "Haselnuss", "Bernstein"],
-      hairF: ["Voluminöse Locken", "Lange Wellen", "Schulterlang gestuft", "Sanfte Wellen"],
+      skinTone: ["Hell gebräunt", "Gebräunt", "Oliv", "Bronze"],
+      complexion: ["Natürliche Poren", "Dewy", "Geölt / Wet-Glow", "Golden-Glow"],
+      hairColor: ["Braun", "Dunkelbraun", "Schwarz", "Kastanie", "Rot / Kupfer", "Grau / Silber"],
+      eyes: ["Braun", "Dunkelbraun", "Haselnuss", "Bernstein", "Grau", "Grün"],
+      hairF: ["Locken", "Lange Wellen", "Lang glatt", "Bob", "Pferdeschwanz", "Wolf Cut / Stufenschnitt", "Wet-Look"],
       hairM: ["Lockiges Deckhaar", "Messy Crop", "Klassischer Seitenscheitel"],
       features: [],
       featuresChance: 0,
@@ -225,66 +236,99 @@ function wuerflePersona(daten, stateAktuell) {
     {
       ethnicity: "Osteuropäisch",
       skinTone: ["Sehr hell", "Hell", "Hell gebräunt"],
-      complexion: ["Matte Textur", "Natürliche Poren", "Feine Textur"],
-      hairColor: ["Dunkelblond", "Aschbraun", "Kastanienbraun", "Schwarzbraun"],
-      eyes: ["Eisblau", "Graublau", "Graugrün", "Dunkelbraun"],
-      hairF: ["Lange glatte Haare", "Lange Wellen", "Kurzer Bob", "Long Bob"],
-      hairM: ["Undercut", "Kurzer Fade Cut", "Slicked Back"],
+      complexion: ["Matt", "Natürliche Poren", "Porzellan", "Rötlich"],
+      hairColor: ["Dunkelblond", "Hellbraun", "Braun", "Kastanie", "Dunkelbraun"],
+      eyes: ["Eisblau", "Blau", "Graublau", "Graugrün", "Grau", "Haselnuss", "Dunkelbraun"],
+      hairF: ["Lang glatt", "Lange Wellen", "Bob", "Curtain Bangs", "Pony", "Pixie"],
+      hairM: ["Undercut", "Kurzer Fade Cut", "Sleek zurück"],
       features: [],
       featuresChance: 0,
     },
     {
+      ethnicity: "Kaukasisch",
+      skinTone: ["Sehr hell", "Hell", "Hell gebräunt", "Oliv"],
+      complexion: ["Natürliche Poren", "Porzellan", "Sonnengegerbt", "Rötlich"],
+      hairColor: ["Blond", "Dunkelblond", "Hellbraun", "Dunkelbraun", "Kastanie", "Rot / Kupfer"],
+      eyes: ["Eisblau", "Blau", "Graublau", "Grün", "Graugrün", "Grau", "Braun", "Haselnuss"],
+      hairF: ["Lang glatt", "Lange Wellen", "Bob", "Pferdeschwanz", "Locken", "Pony", "Pixie"],
+      hairM: ["Klassischer Seitenscheitel", "Kurzer Fade Cut", "Messy Crop", "Lockiges Deckhaar"],
+      features: ["Sommersprossen"],
+      featuresChance: 0.2,
+    },
+    {
       ethnicity: "Nahöstlich",
-      skinTone: ["Hell gebräunt", "Gebräunt", "Oliv", "Warmes Gold"],
-      complexion: ["Natürliche Poren", "Satin Finish", "Zarter Glanz"],
-      hairColor: ["Tiefschwarz", "Schwarz", "Schwarzbraun"],
-      eyes: ["Dunkelbraun", "Tiefbraun", "Haselnuss"],
-      hairF: ["Lange Wellen", "Voluminöse Locken", "Lange glatte Haare"],
+      skinTone: ["Hell gebräunt", "Gebräunt", "Oliv", "Bronze"],
+      complexion: ["Natürliche Poren", "Geölt / Wet-Glow", "Dewy"],
+      hairColor: ["Braun", "Schwarz", "Dunkelbraun"],
+      eyes: ["Braun", "Dunkelbraun", "Haselnuss"],
+      hairF: ["Lange Wellen", "Locken", "Lang glatt", "Pony"],
       hairM: ["Klassischer Seitenscheitel", "Kurzer Fade Cut", "Messy Crop"],
       features: [],
       featuresChance: 0,
     },
     {
       ethnicity: "Ostasiatisch",
-      skinTone: ["Sehr hell", "Hell", "Kühles Porzellan", "Warmes Gold"],
-      complexion: ["Frisch & taufrisch", "Gleichmässig", "Natürliche Poren"],
-      hairColor: ["Tiefschwarz", "Schwarz", "Schwarzbraun"],
-      eyes: ["Dunkelbraun", "Schwarzbraun"],
-      hairF: ["Lange glatte Haare", "Kurzer Bob", "Curtain Bangs", "Pixie Cut"],
+      skinTone: ["Sehr hell", "Hell", "Oliv"],
+      complexion: ["Dewy", "Glatt", "Natürliche Poren"],
+      hairColor: ["Schwarz", "Dunkelbraun", "Braun"],
+      eyes: ["Braun", "Dunkelbraun", "Haselnuss"],
+      hairF: ["Lang glatt", "Bob", "Curtain Bangs", "Pixie", "Pony"],
       hairM: ["Undercut", "Messy Crop", "Klassischer Seitenscheitel"],
       features: [],
       featuresChance: 0,
     },
     {
+      ethnicity: "Südostasiatisch",
+      skinTone: ["Sehr hell", "Hell", "Hell gebräunt", "Gebräunt", "Oliv", "Braun"],
+      complexion: ["Dewy", "Glatt", "Natürliche Poren", "Porzellan"],
+      hairColor: ["Schwarz", "Dunkelbraun", "Braun"],
+      eyes: ["Braun", "Dunkelbraun", "Haselnuss"],
+      hairF: ["Lang glatt", "Lange Wellen", "Bob", "Curtain Bangs"],
+      hairM: ["Undercut", "Kurzer Fade Cut", "Klassischer Seitenscheitel"],
+      features: [],
+      featuresChance: 0,
+    },
+    {
       ethnicity: "Südasiatisch",
-      skinTone: ["Gebräunt", "Braun", "Tiefbraun", "Hell gebräunt"],
-      complexion: ["Zarter Glanz", "Natürliche Poren", "Satin Finish"],
-      hairColor: ["Tiefschwarz", "Schwarz"],
-      eyes: ["Dunkelbraun", "Tiefbraun", "Haselnuss"],
-      hairF: ["Lange glatte Haare", "Lange Wellen", "Voluminöse Locken"],
+      skinTone: ["Gebräunt", "Braun", "Dunkelbraun", "Hell gebräunt"],
+      complexion: ["Dewy", "Natürliche Poren", "Geölt / Wet-Glow"],
+      hairColor: ["Schwarz", "Dunkelbraun"],
+      eyes: ["Braun", "Dunkelbraun", "Haselnuss"],
+      hairF: ["Lang glatt", "Lange Wellen", "Locken", "Bob"],
       hairM: ["Klassischer Seitenscheitel", "Kurzer Fade Cut"],
       features: [],
       featuresChance: 0,
     },
     {
       ethnicity: "Afrikanisch",
-      skinTone: ["Braun", "Tiefbraun", "Warmes Ebenholz", "Dunkles Espresso"],
-      complexion: ["Zarter Glanz", "Natürliche Poren", "Satin Finish"],
-      hairColor: ["Tiefschwarz", "Schwarz"],
-      eyes: ["Dunkelbraun", "Tiefbraun"],
-      hairF: ["Afro", "Braids / Zöpfe", "Kurze Twists", "Buzz Cut"],
-      hairM: ["Kurze Twists", "Fade Cut", "Buzz Cut", "Afro"],
+      skinTone: ["Braun", "Dunkelbraun", "Ebenholz"],
+      complexion: ["Dewy", "Natürliche Poren", "Geölt / Wet-Glow", "Glatt"],
+      hairColor: ["Schwarz", "Dunkelbraun"],
+      eyes: ["Braun", "Dunkelbraun"],
+      hairF: ["Afro", "Braids / Zöpfe", "Undercut", "Kurz wellig"],
+      hairM: ["Undercut", "Afro"],
       features: [],
       featuresChance: 0,
     },
     {
       ethnicity: "Latina",
-      skinTone: ["Hell gebräunt", "Gebräunt", "Warmes Gold", "Oliv"],
-      complexion: ["Zarter Glanz", "Natürliche Poren", "Frisch & taufrisch"],
-      hairColor: ["Warmes Schokobraun", "Kastanienbraun", "Schwarz"],
-      eyes: ["Warmes Braun", "Haselnuss", "Bernstein", "Dunkelbraun"],
-      hairF: ["Lange Wellen", "Beach Waves", "Voluminöse Locken"],
+      skinTone: ["Hell gebräunt", "Gebräunt", "Oliv", "Bronze"],
+      complexion: ["Dewy", "Natürliche Poren", "Golden-Glow", "Glas-Haut"],
+      hairColor: ["Braun", "Dunkelbraun", "Kastanie", "Schwarz", "Dunkelblond"],
+      eyes: ["Braun", "Haselnuss", "Bernstein", "Dunkelbraun", "Grün"],
+      hairF: ["Lange Wellen", "Locken", "Pony", "Lang glatt"],
       hairM: ["Lockiges Deckhaar", "Kurzer Fade Cut", "Messy Crop"],
+      features: [],
+      featuresChance: 0,
+    },
+    {
+      ethnicity: "Gemischt",
+      skinTone: ["Sehr hell", "Hell gebräunt", "Gebräunt", "Oliv", "Braun", "Dunkelbraun", "Ebenholz"],
+      complexion: ["Natürliche Poren", "Dewy", "Porzellan", "Glatt"],
+      hairColor: ["Dunkelblond", "Hellbraun", "Braun", "Kastanie", "Dunkelbraun", "Schwarz", "Rot / Kupfer"],
+      eyes: ["Blau", "Graugrün", "Grün", "Haselnuss", "Braun", "Dunkelbraun", "Grau"],
+      hairF: ["Lange Wellen", "Locken", "Lang glatt", "Pony"],
+      hairM: ["Lockiges Deckhaar", "Messy Crop", "Klassischer Seitenscheitel", "Kurzer Fade Cut"],
       features: [],
       featuresChance: 0,
     },
@@ -294,7 +338,10 @@ function wuerflePersona(daten, stateAktuell) {
   f.ethnicity = valid("ethnicity", arch.ethnicity);
   f.skinTone = valid("skinTone", _zufall(arch.skinTone));
   f.complexion = valid("complexion", _zufall(arch.complexion));
-  f.hairColor = valid("hairColor", _zufall(arch.hairColor));
+  const hairColors = age === "40er" || age === "50er"
+    ? arch.hairColor
+    : arch.hairColor.filter((color) => color !== "Grau / Silber");
+  f.hairColor = valid("hairColor", _zufall(hairColors));
   f.eyes = valid("eyes", _zufall(arch.eyes));
 
   const isMann = gender === "Mann";
@@ -302,53 +349,45 @@ function wuerflePersona(daten, stateAktuell) {
   f.hair = valid("hair", _zufall(hairPool));
 
   // 4. Figure & Body
-  f.height = valid("height", _zufall(["Mittelgross", "Gross", "Zierlich"]));
+  f.height = valid("height", _zufall(["Klein", "Zierlich", "Durchschnittlich", "Durchschnittlich",
+    "Durchschnittlich", "Gross", "Gross", "Model-Grösse"]));
   const figures = isMann
     ? ["Athletisch", "Sportlich", "Definiert", "Schlank", "Muskulös"]
-    : ["Athletisch", "Schlank", "Sanduhr", "Sportlich", "Kurvig", "Definiert"];
+    : ["Sehr schlank", "Schlank", "Schlank", "Schlank", "Schlank definiert", "Athletisch",
+      "Athletisch", "Durchschnittlich", "Durchschnittlich", "Sportlich Kurvig", "Sportlich Kurvig",
+      "Kurvig", "Kurvig", "Sanduhr", "Birnenform", "Mollig", "Plus-Size", "Stämmig", "Muskulös"];
   f.figure = valid("figure", _zufall(figures));
-  f.shoulders = valid("shoulders", _zufall(["Sportlich", "Natürlich", "Schmal", "Definiert"]));
+  f.shoulders = valid("shoulders", _zufall(["Schmal", "Schmal", "Zierlich", "Zierlich", "Gerade", "Gerade",
+    "Gerade", "Breit", "Sportlich", "Sportlich"]));
+  f.bust = valid("bust", _zufall(["Klein", "Klein", "Mittel", "Mittel", "Mittel", "Mittel", "Voll", "Voll",
+    "Gross", "Sehr gross"]));
+  f.waist = valid("waist", _zufall(["Sehr schmal", "Schmal", "Schmal", "Wespentaille", "Definiert", "Definiert",
+    "Gerade", "Gerade", "Gerade", "Weich", "Weich"]));
+  f.belly = valid("belly", _zufall(["Flach", "Flach", "Flach", "Definiert", "Definiert", "Sixpack", "Weich", "Weich", "Weich"]));
+  f.hips = valid("hips", _zufall(["Schmal", "Schmal", "Rund", "Rund", "Rund", "Breit", "Breit", "Betont"]));
+  f.legs = valid("legs", _zufall(["Lang", "Lang", "Schlank", "Schlank", "Schlank", "Muskulös", "Kräftig", "Kräftig", "Kurz"]));
 
   // 5. Facial structure
-  f.cheekbones = valid("cheekbones", _zufall(["Hoch betont", "Markant", "Sanft", "Definiert"]));
-  f.nose = valid("nose", _zufall(["Gerade", "Fein", "Klassisch", "Leichter Schwung"]));
-  f.eyeShape = valid("eyeShape", _zufall(["Mandelförmig", "Offener Blick", "Gross & rund", "Katzenaugen"]));
+  f.faceShape = valid("faceShape", _zufall(["Oval", "Oval", "Oval", "Rund", "Rund", "Herzförmig",
+    "Eckig", "Länglich", "Diamant"]));
+  f.cheekbones = valid("cheekbones", _zufall(["Hoch betont", "Markant", "Markant", "Weich", "Weich", "Weich", "Flach"]));
+  f.nose = valid("nose", _zufall(["Klein", "Klein", "Gerade", "Gerade", "Gerade", "Gerade", "Schmal", "Schmal",
+    "Stupsnase", "Markant", "Leicht gebogen"]));
+  f.eyeShape = valid("eyeShape", _zufall(["Mandelförmig", "Mandelförmig", "Mandelförmig", "Rund", "Rund", "Schmal", "Schmal",
+    "Monolid", "Schlupflider", "Tief liegend", "Weit auseinander", "Katzenaugen"]));
+  f.chin = valid("chin", _zufall(["Spitz", "Schmal", "Schmal", "Rund", "Rund", "Rund", "Breit", "Grübchen", "Fliehend"]));
+  f.jawline = valid("jawline", _zufall(["Weich", "Weich", "Weich", "Definiert", "Definiert", "Markant", "Schmal", "Schmal"]));
+  f.browShape = valid("browShape", _zufall(["Schmal", "Schmal", "Dicht", "Dicht", "Soap Brows", "Gerade", "Gerade", "Gerade",
+    "Geschwungen", "Geschwungen", "Geschwungen", "Buschig", "Bleached"]));
+  f.lipShape = valid("lipShape", _zufall(["Voll", "Voll", "Voll", "Schmal", "Schmal", "Schmollmund", "Breit", "Breit",
+    "Amorbogen", "Volle Unterlippe"]));
 
-  // 6. Makeup (if female / trans female)
-  if (!isMann && Math.random() > 0.35) {
-    f.lipColor = valid("lipColor", _zufall(["Nude", "Altrosa", "Rosenholz", "Warmes Koralle"]));
-    f.lipFinish = valid("lipFinish", _zufall(["Matt", "Satin", "Soft Tint"]));
-    if (Math.random() > 0.5) {
-      f.eyeshadow = valid("eyeshadow", _zufall(["Natürliche Nudetöne", "Warmes Taupe", "Champagner Glow"]));
-    }
-  }
-
-  // 7. Skin Features
+  // 6. Skin Features
   if (arch.featuresChance && Math.random() < arch.featuresChance) {
     m.skinFeatures = arch.features.filter((feat) =>
       daten.felder?.skinFeatures?.some((e) => e.label === feat)
     );
   }
-
-  // 8. Shoes
-  const shoesList = isMann
-    ? ["Sneaker", "Combat Boots", "Loafer"]
-    : ["Combat Boots", "Sneaker", "Loafer", "Stiefeletten mit Absatz", "Ballerinas", "Riemchen-Sandaletten", "Stiletto High Heels"];
-  f.shoes = valid("shoes", _zufall(shoesList));
-  f.shoesColor = valid("shoesColor", _zufall(["Schwarz", "Weiss", "Cognac / Braun", "Nude"]));
-
-  // 9. Editorial Fashion Details
-  const outfits = [
-    "wearing a charcoal wool coat over a minimal top",
-    "wearing an oversized beige cashmere sweater and tailored trousers",
-    "wearing a crisp white cotton shirt with rolled-up sleeves",
-    "wearing a structured black tailored blazer",
-    "wearing a relaxed cream linen shirt",
-    "wearing a classic trench coat over a dark turtleneck",
-    "wearing a vintage brown leather jacket and minimalist tee",
-    "wearing a clean silk slip top in muted tones",
-  ];
-  t.details = _zufall(outfits);
 
   return {
     ...stateAktuell,
