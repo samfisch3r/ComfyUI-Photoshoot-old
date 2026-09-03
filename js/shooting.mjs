@@ -21,6 +21,8 @@ import { app } from "../../scripts/app.js";
 const CLASS_TYPE = "Krea2Photoshooting";
 const HIDDEN = "ShootingState";
 const PROP = "shootingState";
+const MIN_HEIGHT = 560;
+const MIN_NODE_HEIGHT = MIN_HEIGHT + 104;
 
 // Has to match DEFAULT_STATE in shooting.py. If a key Python knows about is
 // missing here, the interface shows it as "off" while the computation runs as
@@ -720,12 +722,17 @@ function baue(node, d) {
   const w = node.addDOMWidget("k2_shooting", "custom", root, {
     getValue: () => node.properties?.[PROP],
     setValue: () => { },
-    getMinHeight: () => 240,
-    getMaxHeight: () => Math.max(240, (node.size?.[1] || 560) - CHROM),
+    getMinHeight: () => MIN_HEIGHT,
+    getMaxHeight: () => Math.max(MIN_HEIGHT, (node.size?.[1] || 584) - CHROM),
     margin: 4,
     serialize: false,
   });
   applyAdaptiveCanvasOnly(w);
+  if ((node.size?.[1] || 0) < MIN_NODE_HEIGHT) {
+    const size = [node.size?.[0] || 340, MIN_NODE_HEIGHT];
+    if (node.setSize) node.setSize(size);
+    else node.size = size;
+  }
 }
 
 registriereStateInjektion(CLASS_TYPE, HIDDEN, PROP, VORGABE);
@@ -738,6 +745,12 @@ app.registerExtension({
     const orig = nodeType.prototype.onConfigure;
     nodeType.prototype.onConfigure = function () {
       const r = orig?.apply(this, arguments);
+      queueMicrotask(() => {
+        if ((this.size?.[1] || 0) < MIN_NODE_HEIGHT) {
+          this.size = [this.size?.[0] || 340, MIN_NODE_HEIGHT];
+          this.graph?.setDirtyCanvas?.(true, true);
+        }
+      });
       queueMicrotask(() => this._k2Zeichne?.());
       return r;
     };
@@ -750,7 +763,7 @@ app.registerExtension({
     // Folded up, the panel needs around 380 px; the rest is room for one open
     // axis. Only for new nodes - when a workflow is loaded, onConfigure puts the
     // saved size back afterwards.
-    node.size = [340, 480];
+    node.size = [340, MIN_NODE_HEIGHT];
     baue(node, presets.shooting);
   },
 });

@@ -22,6 +22,7 @@ import { app } from "../../scripts/app.js";
 const CLASS_TYPE = "Krea2PersonBuilder";
 const HIDDEN = "PersonState";
 const PROP = "personState";
+const MIN_HEIGHT = 500;
 
 const VORGABE = {
   felder: {},
@@ -773,8 +774,8 @@ function baue(node, daten) {
   const w = node.addDOMWidget("k2_person", "custom", root, {
     getValue: () => node.properties?.[PROP],
     setValue: () => { },
-    getMinHeight: () => 240,
-    getMaxHeight: () => Math.max(240, (node.size?.[1] || 400) - CHROM),
+    getMinHeight: () => MIN_HEIGHT,
+    getMaxHeight: () => Math.max(MIN_HEIGHT, (node.size?.[1] || 468) - CHROM),
     margin: 4,
     serialize: false,
   });
@@ -803,7 +804,7 @@ app.registerExtension({
     // The largest tab is make-up at around 206 px; plus tabs, warning,
     // preview, title and output. Only for new nodes - onConfigure restores the
     // saved size for stored workflows.
-    node.size = [340, 420];
+    node.size = [340, MIN_HEIGHT + 48];
     baue(node, presets.person);
   },
 });
