@@ -178,6 +178,21 @@ function _zufall(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+const HAAR_HIGHLIGHTS = {
+  "Blond": ["Balayage", "Lowlights", "Goldener Unterton"],
+  "Platinblond": ["Lowlights", "Ansatz sichtbar", "Goldener Unterton"],
+  "Dunkelblond": ["Balayage", "Highlights", "Goldener Unterton", "Helle Strähnen"],
+  "Dreckig Blond": ["Balayage", "Highlights", "Goldener Unterton", "Helle Strähnen"],
+  "Hellbraun": ["Balayage", "Highlights", "Goldener Unterton", "Helle Strähnen"],
+  "Braun": ["Balayage", "Highlights", "Goldener Unterton", "Helle Strähnen"],
+  "Dunkelbraun": ["Balayage", "Highlights", "Goldener Unterton"],
+  "Schwarz": ["Balayage", "Highlights", "Goldener Unterton"],
+  "Rot / Kupfer": ["Balayage", "Highlights", "Helle Strähnen"],
+  "Kastanie": ["Balayage", "Highlights", "Goldener Unterton", "Helle Strähnen"],
+  "Erdbeerblond": ["Balayage", "Lowlights", "Goldener Unterton"],
+  "Grau / Silber": ["Lowlights", "Helle Strähnen"],
+};
+
 function wuerflePersona(daten, stateAktuell) {
   const f = {};
   const t = { ageExact: "", details: "" };
@@ -347,6 +362,10 @@ function wuerflePersona(daten, stateAktuell) {
   const isMann = gender === "Mann";
   const hairPool = isMann ? arch.hairM : arch.hairF;
   f.hair = valid("hair", _zufall(hairPool));
+  if (Math.random() < 0.3) {
+    const highlightPool = HAAR_HIGHLIGHTS[f.hairColor] || ["Highlights"];
+    f.hairEffect = valid("hairEffect", _zufall(highlightPool));
+  }
 
   // 4. Figure & Body
   f.height = valid("height", _zufall(["Klein", "Zierlich", "Durchschnittlich", "Durchschnittlich",

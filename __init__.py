@@ -17,7 +17,7 @@ not imported here - it registers no nodes, the packs import it themselves.
 """
 
 from .nodes import (api, expression_builder, lighting_builder, person_builder,
-                    pose_builder, shooting, store)
+                    person_saver, pose_builder, shooting, store)
 
 api.register()
 
@@ -25,7 +25,7 @@ NODE_CLASS_MAPPINGS = {}
 NODE_DISPLAY_NAME_MAPPINGS = {}
 
 for _modul in (person_builder, expression_builder, pose_builder,
-               lighting_builder, shooting, store):
+               lighting_builder, shooting, store, person_saver):
     NODE_CLASS_MAPPINGS.update(_modul.NODE_CLASS_MAPPINGS)
     NODE_DISPLAY_NAME_MAPPINGS.update(_modul.NODE_DISPLAY_NAME_MAPPINGS)
 
