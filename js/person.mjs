@@ -321,8 +321,8 @@ function wuerflePersona(daten, stateAktuell) {
       complexion: ["Dewy", "Natürliche Poren", "Geölt / Wet-Glow", "Glatt"],
       hairColor: ["Schwarz", "Dunkelbraun"],
       eyes: ["Braun", "Dunkelbraun"],
-      hairF: ["Afro", "Braids / Zöpfe", "Undercut", "Kurz wellig"],
-      hairM: ["Undercut", "Afro"],
+      hairF: ["Afro", "Braids / Zöpfe", "Cornrows", "Twists", "Silk Press", "Undercut", "Kurz wellig"],
+      hairM: ["Undercut", "Afro", "Cornrows", "Twists", "Kurz wellig"],
       features: [],
       featuresChance: 0,
     },
@@ -444,6 +444,36 @@ function baue(node, daten) {
     nachfrage = false;   // any other change withdraws the confirmation
     schreibeState(node, PROP, s);
     zeichne();
+  };
+  const importiere = (roh) => {
+    const geladen = JSON.parse(roh);
+    if (geladen?.felder) {
+      schreib({
+        ...VORGABE, ...geladen,
+        felder: { ...(geladen.felder || {}) },
+        mehrfach: { ...VORGABE.mehrfach, ...(geladen.mehrfach || {}) },
+        texte: { ...VORGABE.texte, ...(geladen.texte || {}) },
+        gruppe: { ...VORGABE.gruppe, ...(geladen.gruppe || {}) },
+      });
+      return;
+    }
+    throw new Error("Person JSON must contain builder state");
+  };
+  const ladeJson = () => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = ".json,application/json";
+    input.onchange = () => {
+      const file = input.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try { importiere(String(reader.result || "")); }
+        catch (e) { window.alert(uet("JSON konnte nicht geladen werden", "ui")); }
+      };
+      reader.readAsText(file);
+    };
+    input.click();
   };
   const name = (cat) => uet(daten.namen?.[cat] || cat, "feldnamen");
 
@@ -706,6 +736,13 @@ function baue(node, daten) {
         schreib(neu);
       };
       zeile.append(inspireBtn);
+
+      const loadBtn = document.createElement("span");
+      loadBtn.className = "k2-inspire-btn";
+      loadBtn.textContent = "↥ " + uet("Load JSON", "ui");
+      loadBtn.title = uet("Gespeicherte Person aus JSON laden", "ui");
+      loadBtn.onclick = ladeJson;
+      zeile.append(loadBtn);
 
       // Right: Reset buttons
       const rechts = document.createElement("div");

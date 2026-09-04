@@ -559,7 +559,7 @@ def _lora_mode_plan(seed=0):
             daten["ausdruck"] = {"stimmung": "Ernst"}
             daten["scene"] = "on a wet metropolitan street pavement at night, surrounded by towering city buildings and soft glowing ambient street lamps"
             daten["style"] = "moody urban cinematic photography, sharp out-of-focus background traffic bokeh lights, strong directional side illumination"
-            daten["person_bits"] = ["wearing a structured heavy leather zip-up coat, thick textured leather material with visible matte grain folds"]
+            daten["person_bits"] = ["wearing a tailored charcoal wool overcoat over a fitted black mock-neck top, clean structured shoulders and soft natural fabric folds"]
             daten["pose"] = {
                 "haltung": "Stehend",
                 "raum": "Bildmitte",
@@ -591,8 +591,8 @@ def _lora_mode_plan(seed=0):
             daten["kamera"] = "Halbtotale"
             daten["fokus"] = "Rücken"
             daten["ausdruck"] = {"stimmung": "Nachdenklich"}
-            daten["scene"] = "positioned inside a cozy dim room near a roaring brick fireplace, dark moody indoor scene background"
-            daten["style"] = "high-contrast chiaroscuro photography, dynamic directional lighting from a warm amber flame source, deep dramatic shadows"
+            daten["scene"] = "positioned inside a cozy warmly lit room near a roaring brick fireplace, soft amber ambient fill light keeping the indoor background visible"
+            daten["style"] = "soft chiaroscuro photography, balanced warm directional firelight with gentle ambient fill, softly lifted shadows"
             daten["person_bits"] = ["hair completely styled up into a tight clean high bun, exposing the neck and ears, wearing a simple top with thin spaghetti shoulder straps"]
             daten["pose"] = {
                 "haltung": "Auf einem Hocker sitzend",
@@ -732,7 +732,7 @@ def _lora_mode_plan(seed=0):
             daten["ausdruck"] = {"stimmung": "Konzentriert"}
             daten["scene"] = "studio setting, clean neutral solid mid-grey backdrop, bright diffused ambient studio environment look"
             daten["style"] = "high-end studio lifestyle portraiture, crisp sharp eye detailing, professional micro-contrast rendering"
-            daten["person_bits"] = ["wearing a thick high-neck olive green wool knit turtleneck sweater, long hair layout draped forward over both shoulders in front"]
+            daten["person_bits"] = ["wearing a thick high-neck olive green wool knit turtleneck sweater"]
             daten["pose"] = {
                 "haltung": "Stehend",
                 "koerper": "Frontal zur Kamera",

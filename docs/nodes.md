@@ -8,7 +8,7 @@ each control means and why it works that way.
 
 | Node | Purpose |
 |---|---|
-| **Photoshoot Person** | 44 fields across six tabs: basics, body, head, face, make-up, clothing. Outputs `person` (full text) and `person_data` (JSON, for camera-dependent shortening in Photoshoot) |
+| **Photoshoot Person** | 44 fields across six tabs: basics, body, head, face, make-up, clothing. Outputs `person` (full text), `person_data` (JSON, for camera-dependent shortening in Photoshoot), and `person_state` (complete builder state for saving/restoring). The `Load JSON` action accepts `person_state` files. |
 | **Photoshoot Expression** | 90 moods in nine families, plus eyes, gaze, brows, mouth, head tilt |
 | **Photoshoot Pose** | Posture, **placement in the room**, orientation, arms, legs, body tension |
 
@@ -43,6 +43,11 @@ For the same reason neither material list contains a colour word any more —
 Reset works per tab or for the whole node, each showing the count in its label
 — you should see what you are about to lose. The whole-node reset needs a
 second click to confirm; any other change withdraws the confirmation.
+
+To save and restore the builder selections, connect `person_state` to the
+Person Saver node. The saver writes the state JSON; the builder's `Load JSON`
+action reads that same state format back into the controls. Keep using
+`person_data` for the Photoshoot Series connection.
 
 #### Expression and pose
 

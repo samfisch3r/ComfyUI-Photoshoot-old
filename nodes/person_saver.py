@@ -31,40 +31,41 @@ class PhotoshootPersonSaver:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "person_data": ("STRING", {"forceInput": True}),
                 "filename_prefix": ("STRING", {"default": "characters/person"}),
             },
             "optional": {
                 "override_json": ("STRING", {"default": "", "multiline": True}),
+                "person_state": ("STRING", {"forceInput": True}),
             },
         }
 
-    RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("person_data",)
+    RETURN_TYPES = ()
+    RETURN_NAMES = ()
     FUNCTION = "save_person"
     OUTPUT_NODE = True
     CATEGORY = "Photoshoot"
-    DESCRIPTION = "Saves person configuration JSON to the ComfyUI output directory."
+    DESCRIPTION = "Saves person state JSON to the ComfyUI output directory."
 
     @classmethod
     def IS_CHANGED(cls, **kwargs):
         return time.time()
 
-    def save_person(self, person_data, filename_prefix="characters/person", override_json=""):
-        data_to_save = override_json.strip() if override_json.strip() else person_data
+    def save_person(self, filename_prefix="characters/person", override_json="",
+                    person_state=""):
+        data_to_save = override_json.strip() or person_state.strip()
         try:
             parsed_data = json.loads(data_to_save)
             path = _output_path(filename_prefix)
         except (json.JSONDecodeError, TypeError, ValueError, OSError) as error:
             print("[Photoshoot Person Saver] Error: %s" % error)
-            return (person_data,)
+            return ()
 
         os.makedirs(os.path.dirname(path), exist_ok=True)
         with open(path, "w", encoding="utf-8") as output_file:
             json.dump(parsed_data, output_file, indent=4, ensure_ascii=False)
 
         print("[Photoshoot Person Saver] Saved person configuration to: %s" % path)
-        return (data_to_save,)
+        return ()
 
 
 NODE_CLASS_MAPPINGS = {"PhotoshootPersonSaver": PhotoshootPersonSaver}

@@ -11,10 +11,9 @@ sits as JSON in a hidden input - as with pose and expression. Unlike those,
 there is deliberately no seed and no dice here: a person should stay the same
 across many images.
 
-Two outputs: "person" is always the full description, "person_data" is the
-value dict as JSON. Only the latter lets the photoshoot shorten the block per
-framing (see compose_person and detail_fuer_kamera) - a finished sentence
-cannot be taken apart again reliably.
+Three outputs: "person" is always the full description, "person_data" is the
+value dict as JSON, and "person_state" is the complete builder state for
+restoring the selections later.
 
 Self-test:  python -m nodes.person_builder   (from the package folder)
 """
@@ -142,6 +141,9 @@ PRESETS = {
         ("Flechtzopf", "long {c} side braid"), ("Locken", "voluminous curly {c} hair"),
         ("Afro", "voluminous naturally textured {c} afro"),
         ("Braids / Zöpfe", "long {c} box braids"),
+        ("Cornrows", "neat {c} cornrow braids close to the scalp"),
+        ("Twists", "shoulder-length {c} two-strand twists"),
+        ("Silk Press", "sleek straightened {c} hair with a smooth silk-press finish"),
         ("Pony", "shoulder-length {c} hair with straight bangs"),
         ("Curtain Bangs", "shoulder-length {c} hair with soft curtain bangs"),
         ("Wolf Cut / Stufenschnitt", "layered {c} wolf cut with textured ends"),
@@ -1005,13 +1007,14 @@ class Krea2PersonBuilder:
             },
         }
 
-    RETURN_TYPES = ("STRING", "STRING")
-    RETURN_NAMES = ("person", "person_data")
+    RETURN_TYPES = ("STRING", "STRING", "STRING")
+    RETURN_NAMES = ("person", "person_data", "person_state")
     FUNCTION = "build"
     CATEGORY = "Photoshoot"
     DESCRIPTION = ("Baut die Person als englischen Text. person ist immer die "
                    "volle Beschreibung; person_data ist der Wertdict als JSON "
-                   "fuer Photoshooting, das je Kameraeinstellung kuerzt.")
+                   "fuer Photoshooting, das je Kameraeinstellung kuerzt; "
+                   "person_state speichert die Builder-Auswahl.")
 
     def build(self, PersonState=None):
         try:
@@ -1043,7 +1046,8 @@ class Krea2PersonBuilder:
         # person_data: raw values for the framing-dependent compose_person() in
         # the photoshoot. Without this output you would have to take the
         # finished text apart again - which cannot be done reliably.
-        return (compose_person(p), json.dumps(p, ensure_ascii=False))
+        return (compose_person(p), json.dumps(p, ensure_ascii=False),
+            json.dumps(state, ensure_ascii=False))
 
 
 NODE_CLASS_MAPPINGS = {"Krea2PersonBuilder": Krea2PersonBuilder}

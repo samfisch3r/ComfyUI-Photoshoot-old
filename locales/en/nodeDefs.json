@@ -95,7 +95,7 @@
   },
   "Krea2PersonBuilder": {
     "display_name": "Photoshoot Person",
-    "description": "Builds the person as English text. 'person' is always the full description; 'person_data' is the raw values as JSON for the Photoshoot, which shortens them per camera framing.",
+    "description": "Builds the person as English text. 'person' is always the full description; 'person_data' is the raw values as JSON for the Photoshoot, which shortens them per camera framing; 'person_state' is the complete builder state for saving and restoring.",
     "outputs": {
       "0": {
         "name": "person"
@@ -103,8 +103,8 @@
       "1": {
         "name": "person_data"
       },
-      "noise_seed": {
-        "name": "noise_seed"
+      "2": {
+        "name": "person_state"
       }
     }
   },
