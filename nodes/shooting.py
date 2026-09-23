@@ -239,10 +239,10 @@ def _lora_mode_plan(seed=0):
             daten["fokus"] = "Gesicht"
             daten["scene"] = "isolated on a seamless pure white backdrop, perfectly even high-key beauty studio illumination, soft uniform ambient wash"
             daten["pose"] = {
-                "haltung": "standing",
-                "raum": "the subject centered in the middle ground",
-                "koerper": "facing the camera directly",
-                "spannung": "with an upright posture",
+                "haltung": "Stehend",
+                "raum": "Vordergrund",
+                "koerper": "Frontal zur Kamera",
+                "spannung": "Aufrecht",
             }
         elif idx == 1:
             daten["kamera"] = "Nahaufnahme"
@@ -257,17 +257,16 @@ def _lora_mode_plan(seed=0):
                 "spannung": "Entspannt",
             }
         elif idx == 2:
-            daten["kamera"] = "Porträt"
-            daten["fokus"] = "Gesicht"
+            daten["kamera"] = "Halbtotale"
+            daten["fokus"] = "Dekolleté"
             daten["ausdruck"] = {"stimmung": "Ernst"}
-            daten["scene"] = "positioned on a seamless minimalist white backdrop, soft omnidirectional beauty-dish distribution, completely balanced fill lighting"
-            daten["style"] = "commercial beauty portfolio photography, wrapped vanity lightning scheme, zero drop-shadow contrast, professional high-end catalog look, ultra-sharp skin pore texture macro detailing, natural skin imperfections, crisp lens focus"
+            daten["scene"] = "on a seamless minimalist white studio backdrop, balanced beauty lighting, face clearly visible above the neckline"
+            daten["style"] = "editorial neckline portrait photography, face fully visible, refined garment detail, clean commercial studio composition"
             daten["pose"] = {
                 "haltung": "Stehend",
                 "raum": "Vordergrund",
-                "koerper": "Dreiviertelansicht",
-                "arme": "Hände auf den Hüften",
-                "spannung": "Schultern zurück",
+                "arme": "Hinter dem Kopf",
+                "spannung": "Entspannt",
             }
         elif idx == 3:
             daten["kamera"] = "Nahaufnahme"
